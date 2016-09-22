@@ -22,4 +22,9 @@ public class FireSimulation extends Simulation {
 		
 		return simulationScene;
 	}
+
+	@Override
+	protected void updateGrid() {
+		// TODO Auto-generated method stub
+	}
 }

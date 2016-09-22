@@ -1,5 +1,8 @@
 package cellsociety_team07;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javafx.scene.Group;
@@ -10,11 +13,11 @@ import javafx.scene.paint.Color;
  * This class implements the Segregation simulation.
  */
 public class SegregationSimulation extends Simulation {
-	private static final State stateX = new State("X");
-	private static final State stateO = new State("O");
-	private static final State stateEmpty = new State("EMPTY");
+	private static final String stateX = "X";
+	private static final String stateO = "O";
+	private static final String stateEmpty = "EMPTY";
 	
-	private double threshold = 0.3; 		// hand-coded for now
+	private double threshold = 0.3; 		// hard-coded for now
 	
 	public SegregationSimulation(SceneManager sceneManager) {
 		super(sceneManager);
@@ -37,8 +40,7 @@ public class SegregationSimulation extends Simulation {
 	private void initGrid() {
 		grid = new Grid(rows, columns);
 		initStates();
-		initNeighbors();
-		displayGrid();
+		updateNeighbors();
 	}
 	
 	private void initStates() {
@@ -55,17 +57,17 @@ public class SegregationSimulation extends Simulation {
 		int i = r.nextInt(3);
 		
 		if (i == 0) {
-			return stateX;
+			return new State(stateX);
 		}
 		if (i == 1) {
-			return stateO;
+			return new State(stateO);
 		}
 		else {
-			return stateEmpty;
+			return new State(stateEmpty);
 		}
 	}
 	
-	private void initNeighbors() {
+	private void updateNeighbors() {
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < columns; col++) {
 				Cell cell = grid.getCell(row, col);
@@ -86,7 +88,87 @@ public class SegregationSimulation extends Simulation {
 		}
 	}
 	
-	private void displayGrid() {
-		// display the grid on the Scene
+	@Override
+	protected void updateGrid() {
+		List<Point> emptyCells = getEmptyCells();
+		List<Point> cellsToMove = getCellsToMove();
+		moveCells(cellsToMove, emptyCells);
+		updateNeighbors();
+	}
+	
+	private List<Point> getEmptyCells() {
+		List<Point> emptyCells = new ArrayList<Point>();
+		
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < columns; col++) {
+				Cell cell = grid.getCell(row, col);
+				if (cell.getState().equals(new State(stateEmpty))) {
+					emptyCells.add(new Point(row, col));
+				}
+			}
+		}
+		
+		return emptyCells;
+	}
+	
+	private List<Point> getCellsToMove() {
+		List<Point> cellsToMove = new ArrayList<Point>();
+		
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < columns; col++) {
+				Cell cell = grid.getCell(row, col);
+				if (!isCellSatisfied(cell)) {
+					cellsToMove.add(new Point(row, col));
+				}
+			}
+		}
+		
+		return cellsToMove;
+	}
+	
+	private boolean isCellSatisfied(Cell cell) {
+		List<Cell> neighbors = cell.getNeighborhood().getNeighbors();
+		State cellState = cell.getState();
+		
+		if (cell.getState().equals(new State(stateEmpty))) {
+			return true;
+		}
+		
+		int nonEmptyNeighbors = 0;
+		int sameStateNeighbors = 0;
+		
+		for (Cell neighbor : neighbors) {
+			if (neighbor.getState().equals(new State(stateEmpty))) {
+				continue;
+			}
+				
+			nonEmptyNeighbors++;
+			if (neighbor.getState().equals(cellState)) {
+				sameStateNeighbors++;
+			}
+		}
+		
+		if (nonEmptyNeighbors == 0) {
+			return true;
+		}
+		return (double) sameStateNeighbors / nonEmptyNeighbors > threshold;
+	}
+	
+	private void moveCells(List<Point> cellsToMove, List<Point> emptyCells) {
+		for (Point cellPoint : cellsToMove) {
+			Cell cell = grid.getCell(cellPoint.x, cellPoint.y);
+			
+			Point emptyCellPoint = emptyCells.remove(0);
+			Cell emptyCell = grid.getCell(emptyCellPoint.x, emptyCellPoint.y);
+			
+			if (cell.getState().equals(new State(stateX))) {
+				emptyCell.setState(new State(stateX));
+			}
+			else {
+				emptyCell.setState(new State(stateO));
+			}
+			
+			cell.setState(new State(stateEmpty));
+		}
 	}
 }

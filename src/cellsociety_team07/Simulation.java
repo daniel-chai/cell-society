@@ -30,6 +30,9 @@ public abstract class Simulation {
 	
 	protected void addStepButton() {
 		Button stepButton = UIGenerator.createButton("Show Next Step", 200, 20, 150, 20, 15);
+		stepButton.setOnAction(e -> updateGrid());
 		root.getChildren().add(stepButton);
 	}
+	
+	protected abstract void updateGrid();
 }
