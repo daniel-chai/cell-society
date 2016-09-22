@@ -22,10 +22,24 @@ public class Cell {
 	}
 	
 	/**
+	 * @return the Rectangle representing the Cell
+	 */
+	public Rectangle getRectangle() {
+		return rectangle;
+	}
+	
+	/**
 	 * @return the current State of the Cell
 	 */
 	public State getState() {
 		return state;
+	}
+	
+	/**
+	 * @return the Neighborhood of the Cell
+	 */
+	public Neighborhood getNeighborhood() {
+		return neighborhood;
 	}
 	
 	/**
@@ -34,12 +48,5 @@ public class Cell {
 	 */
 	public void setState(State state) {
 		this.state = state;
-	}
-	
-	/**
-	 * @return the Neighborhood of the Cell
-	 */
-	public Neighborhood getNeighborhood() {
-		return neighborhood;
 	}
 }
