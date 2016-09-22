@@ -31,7 +31,7 @@ public class SceneManager {
 	 */
 	public void goToMenuScene(SceneManager sceneManager) {
 		Menu menu = new Menu(sceneManager);
-		Scene menuScene = menu.init(Main.SIZE, Main.SIZE);
+		Scene menuScene = menu.init();
 		stage.setScene(menuScene);
 	}
 	
@@ -41,15 +41,47 @@ public class SceneManager {
 	 */
 	public void goToDataInputScene(SceneManager sceneManager) {
 		DataInput dataInput = new DataInput(sceneManager);
-		Scene dataInputScene = dataInput.init(Main.SIZE, Main.SIZE);
+		Scene dataInputScene = dataInput.init();
 		stage.setScene(dataInputScene);
 	}
 	
 	/**
-	 * Sets the scene to be the Simulation Scene
+	 * Sets the scene to be the Segregation simulation Scene
 	 * @param sceneManager SceneManager currently being used
 	 */
-	public void goToSimulationScene(SceneManager sceneManager) {
-		
+	public void goToSegregationScene(SceneManager sceneManager) {
+		SegregationSimulation simulation = new SegregationSimulation(sceneManager);
+		Scene simulationScene = simulation.init();
+		stage.setScene(simulationScene);
+	}
+	
+	/**
+	 * Sets the scene to be the Predator-Prey simulation Scene
+	 * @param sceneManager SceneManager currently being used
+	 */
+	public void goToPredatorPreyScene(SceneManager sceneManager) {
+		PredatorPreySimulation simulation = new PredatorPreySimulation(sceneManager);
+		Scene simulationScene = simulation.init();
+		stage.setScene(simulationScene);
+	}
+
+	/**
+	 * Sets the scene to be the Fire simulation Scene
+	 * @param sceneManager SceneManager currently being used
+	 */
+	public void goToFireScene(SceneManager sceneManager) {
+		FireSimulation simulation = new FireSimulation(sceneManager);
+		Scene simulationScene = simulation.init();
+		stage.setScene(simulationScene);
+	}
+	
+	/**
+	 * Sets the scene to be the Game-of-Life simulation Scene
+	 * @param sceneManager SceneManager currently being used
+	 */
+	public void goToGameOfLifeScene(SceneManager sceneManager) {
+		GameOfLifeSimulation simulation = new GameOfLifeSimulation(sceneManager);
+		Scene simulationScene = simulation.init();
+		stage.setScene(simulationScene);
 	}
 }

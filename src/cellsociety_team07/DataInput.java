@@ -26,9 +26,9 @@ public class DataInput {
 	 * @param height the height of the Scene
 	 * @return Scene with the specified attributes
 	 */
-	public Scene init(int width, int height) {
+	public Scene init() {
 		root = new Group();
-		dataInputScene = new Scene(root, width, height, Color.AZURE);
+		dataInputScene = new Scene(root, Main.SIZE, Main.SIZE, Color.AZURE);
 		
 		return dataInputScene;
 	}
