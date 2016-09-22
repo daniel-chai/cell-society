@@ -34,5 +34,24 @@ public abstract class Simulation {
 		root.getChildren().add(stepButton);
 	}
 	
+	protected void initGrid() {
+		grid = new Grid(rows, columns);
+		initStates();
+		updateNeighbors();
+	}
+	
+	protected abstract void initStates();	
+	
+	protected void updateNeighbors() {
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < columns; col++) {
+				Cell cell = grid.getCell(row, col);
+				calculateNeighbors(cell, row, col);
+			}
+		}
+	}
+	
+	protected abstract void calculateNeighbors(Cell cell, int row, int col);
+	
 	protected abstract void updateGrid();
 }

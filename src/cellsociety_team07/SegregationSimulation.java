@@ -17,7 +17,7 @@ public class SegregationSimulation extends Simulation {
 	private static final String stateO = "O";
 	private static final String stateEmpty = "EMPTY";
 	
-	private double threshold = 0.3; 		// hard-coded for now
+	private double threshold; 		
 	
 	public SegregationSimulation(SceneManager sceneManager) {
 		super(sceneManager);
@@ -30,20 +30,17 @@ public class SegregationSimulation extends Simulation {
 		addMenuButton();
 		addStepButton();
 		
+		threshold = 0.3; 	// hard-coded for now
 		rows = 10;			// hard-coded for now
 		columns = 10;		// hard-coded for now
+		
 		initGrid();
 		
 		return simulationScene;
 	}
 	
-	private void initGrid() {
-		grid = new Grid(rows, columns);
-		initStates();
-		updateNeighbors();
-	}
-	
-	private void initStates() {
+	@Override
+	protected void initStates() {
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < columns; col++) {
 				Cell cell = new Cell(generateRandomState());
@@ -67,16 +64,8 @@ public class SegregationSimulation extends Simulation {
 		}
 	}
 	
-	private void updateNeighbors() {
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < columns; col++) {
-				Cell cell = grid.getCell(row, col);
-				calculateNeighbors(cell, row, col);
-			}
-		}
-	}
-	
-	private void calculateNeighbors(Cell cell, int row, int col) {
+	@Override
+	protected void calculateNeighbors(Cell cell, int row, int col) {
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
 				if (i + row < 0 || i + row >= rows || j + col < 0 || j + col >= columns) {
@@ -127,12 +116,12 @@ public class SegregationSimulation extends Simulation {
 	}
 	
 	private boolean isCellSatisfied(Cell cell) {
-		List<Cell> neighbors = cell.getNeighborhood().getNeighbors();
-		State cellState = cell.getState();
-		
 		if (cell.getState().equals(new State(stateEmpty))) {
 			return true;
 		}
+		
+		List<Cell> neighbors = cell.getNeighborhood().getNeighbors();
+		State cellState = cell.getState();
 		
 		int nonEmptyNeighbors = 0;
 		int sameStateNeighbors = 0;

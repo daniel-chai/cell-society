@@ -8,7 +8,8 @@ import javafx.scene.paint.Color;
  * This class implements the Game-of-Life simulation
  */
 public class GameOfLifeSimulation extends Simulation {
-
+	
+	
 	public GameOfLifeSimulation(SceneManager sceneManager) {
 		super(sceneManager);
 	}
@@ -20,11 +21,26 @@ public class GameOfLifeSimulation extends Simulation {
 		addMenuButton();
 		addStepButton();
 		
+		rows = 10;			// hard-coded for now
+		columns = 10;		// hard-coded for now
+		
+		initGrid();
+		
 		return simulationScene;
 	}
 
 	@Override
+	protected void initStates() {
+		
+	}
+	
+	@Override
+	protected void calculateNeighbors(Cell cell, int row, int col) {
+		
+	}
+	
+	@Override
 	protected void updateGrid() {
-		// TODO Auto-generated method stub
+		
 	}
 }

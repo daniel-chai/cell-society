@@ -8,7 +8,8 @@ import javafx.scene.paint.Color;
  * This class implements the Fire simulation.
  */
 public class FireSimulation extends Simulation {
-
+	
+	
 	public FireSimulation(SceneManager sceneManager) {
 		super(sceneManager);
 	}
@@ -20,9 +21,24 @@ public class FireSimulation extends Simulation {
 		addMenuButton();
 		addStepButton();
 		
+		rows = 10;			// hard-coded for now
+		columns = 10;		// hard-coded for now
+		
+		initGrid();
+		
 		return simulationScene;
 	}
+	
+	@Override
+	protected void initStates() {
+		// TODO Auto-generated method stub
+	}
 
+	@Override
+	protected void calculateNeighbors(Cell cell, int row, int col) {
+		// TODO Auto-generated method stub
+	}
+	
 	@Override
 	protected void updateGrid() {
 		// TODO Auto-generated method stub
