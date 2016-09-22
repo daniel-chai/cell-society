@@ -16,10 +16,12 @@ public class Grid {
 	}
 	
 	/**
-	 * @return the 2-D array of Cells representing the Grid
+	 * @param row the row of the Cell
+	 * @param col the column of the Cell
+	 * @return the Cell at the specified row and column
 	 */
-	public Cell[][] getGrid() {
-		return grid;
+	public Cell getCell(int row, int col) {
+		return grid[row][col];
 	}
 	
 	/**

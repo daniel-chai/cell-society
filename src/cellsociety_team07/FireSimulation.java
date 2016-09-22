@@ -18,6 +18,7 @@ public class FireSimulation extends Simulation {
 		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
 		
 		addMenuButton();
+		addStepButton();
 		
 		return simulationScene;
 	}

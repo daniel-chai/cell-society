@@ -14,13 +14,22 @@ public abstract class Simulation {
 	protected Scene simulationScene;
 	protected Group root;
 	
+	protected Grid grid;
+	protected int rows;
+	protected int columns;
+	
 	protected Simulation(SceneManager sceneManager) {
 		this.sceneManager = sceneManager;
 	}
 	
 	protected void addMenuButton() {
-		Button menuButton = UIGenerator.createButton("Back to Menu", 20, 20, 50, 20, 15);
+		Button menuButton = UIGenerator.createButton("Back to Menu", 20, 20, 150, 20, 15);
 		menuButton.setOnAction(e -> sceneManager.goToMenuScene(sceneManager));
 		root.getChildren().add(menuButton);
+	}
+	
+	protected void addStepButton() {
+		Button stepButton = UIGenerator.createButton("Show Next Step", 200, 20, 150, 20, 15);
+		root.getChildren().add(stepButton);
 	}
 }

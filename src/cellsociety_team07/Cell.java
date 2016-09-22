@@ -1,9 +1,12 @@
 package cellsociety_team07;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  * This class represents a single Cell in a grid.
  */
 public class Cell {
+	private Rectangle rectangle;
 	private State state;
 	private Neighborhood neighborhood;
 	
@@ -13,6 +16,8 @@ public class Cell {
 	 */
 	public Cell(State state) {
 		this.state = state;
+		
+		this.rectangle = new Rectangle();
 		this.neighborhood = new Neighborhood();
 	}
 	
