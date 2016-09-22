@@ -2,6 +2,7 @@ package cellsociety_team07;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 /**
@@ -26,10 +27,31 @@ public class Menu {
 	 * @param height the height of the Scene
 	 * @return Scene with the specified attributes
 	 */
-	public Scene init(int width, int height) {
+	public Scene init() {
 		root = new Group();
-		menuScene = new Scene(root, width, height, Color.AZURE);
+		menuScene = new Scene(root, Main.SIZE, Main.SIZE, Color.AZURE);
+		
+		addSimulationStartButtons();
 		
 		return menuScene;
+	}
+	
+	private void addSimulationStartButtons() {
+		Button segregationBtn = UIGenerator.createButton("Start Segregation Simulation", 50, 50);
+		segregationBtn.setOnAction(e -> sceneManager.goToSegregationScene(sceneManager));
+		
+		Button predatorPreyBtn = UIGenerator.createButton("Start Predator-Prey Simulation", 50, 100);
+		predatorPreyBtn.setOnAction(e -> sceneManager.goToPredatorPreyScene(sceneManager));
+		
+		Button fireBtn = UIGenerator.createButton("Start Fire Simulation", 50, 150);
+		fireBtn.setOnAction(e -> sceneManager.goToFireScene(sceneManager));
+		
+		Button gameOfLifeBtn = UIGenerator.createButton("Start Game-of-Life Simulation", 50, 200);
+		gameOfLifeBtn.setOnAction(e -> sceneManager.goToGameOfLifeScene(sceneManager));
+		
+		root.getChildren().add(segregationBtn);
+		root.getChildren().add(predatorPreyBtn);
+		root.getChildren().add(fireBtn);
+		root.getChildren().add(gameOfLifeBtn);
 	}
 }

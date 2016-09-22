@@ -13,6 +13,7 @@ public class Cell {
 	 */
 	public Cell(State state) {
 		this.state = state;
+		this.neighborhood = new Neighborhood();
 	}
 	
 	/**
