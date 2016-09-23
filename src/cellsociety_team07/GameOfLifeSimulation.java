@@ -16,8 +16,6 @@ public class GameOfLifeSimulation extends Simulation {
 	private static final String stateAlive = "ALIVE";
 	private static final String stateDead = "DEAD";
 	
-	private State[][] nextState;
-	
 	public GameOfLifeSimulation(SceneManager sceneManager) {
 		super(sceneManager);
 	}
@@ -56,7 +54,7 @@ public class GameOfLifeSimulation extends Simulation {
 	
 	private State generateRandomState() {
 		Random r = new Random();
-		int i = r.nextInt(2);
+		int i = r.nextInt(4);
 		
 		if (i == 0) {
 			return new State(stateAlive);
@@ -85,8 +83,8 @@ public class GameOfLifeSimulation extends Simulation {
 	@Override
 	protected void updateGrid() {
 		calculateNextStates();
-		setNextStates();
 		
+		setNextStates();
 		displayGrid();
 	}
 	
@@ -131,14 +129,5 @@ public class GameOfLifeSimulation extends Simulation {
 		}
 		
 		return aliveNeighbors;
-	}
-	
-	private void setNextStates() {
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < columns; col++) {
-				Cell cell = grid.getCell(row, col);
-				cell.setState(nextState[row][col]);
-			}
-		}
 	}
 }

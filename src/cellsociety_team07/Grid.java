@@ -1,5 +1,7 @@
 package cellsociety_team07;
 
+import java.awt.Point;
+
 /**
  * This class represents a grid of Cells.
  */
@@ -22,6 +24,22 @@ public class Grid {
 	 */
 	public Cell getCell(int row, int col) {
 		return grid[row][col];
+	}
+	
+	/**
+	 * @param cell the Cell
+	 * @return location of the specified Cell in the grid
+	 */
+	public Point getLocation(Cell cell) {
+		for (int row = 0; row < grid.length; row++) {
+			for (int col = 0; col < grid[0].length; col++) {
+				if (grid[row][col] == cell) {
+					return new Point(row, col);
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	/**

@@ -25,6 +25,8 @@ public abstract class Simulation {
 	protected Group gridUI;
 	protected Map<State, Color> colorMap;
 	
+	protected State[][] nextState;
+	
 	protected Simulation(SceneManager sceneManager) {
 		this.sceneManager = sceneManager;
 	}
@@ -87,4 +89,13 @@ public abstract class Simulation {
 	protected abstract void calculateNeighbors(Cell cell, int row, int col);
 	
 	protected abstract void updateGrid();
+	
+	protected void setNextStates() {
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < columns; col++) {
+				Cell cell = grid.getCell(row, col);
+				cell.setState(nextState[row][col]);
+			}
+		}
+	}
 }

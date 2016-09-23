@@ -18,7 +18,7 @@ public class SegregationSimulation extends Simulation {
 	private static final String stateO = "O";
 	private static final String stateEmpty = "EMPTY";
 	
-	private double threshold; 		
+	private double threshold;
 	
 	public SegregationSimulation(SceneManager sceneManager) {
 		super(sceneManager);
@@ -60,7 +60,7 @@ public class SegregationSimulation extends Simulation {
 	
 	private State generateRandomState() {
 		Random r = new Random();
-		int i = r.nextInt(3);
+		int i = r.nextInt(4);
 		
 		if (i == 0) {
 			return new State(stateX);

@@ -18,7 +18,6 @@ public class FireSimulation extends Simulation {
 	private static final String stateTree = "TREE";
 	
 	private double probCatch;
-	private State[][] nextState;
 	
 	public FireSimulation(SceneManager sceneManager) {
 		super(sceneManager);
@@ -80,8 +79,8 @@ public class FireSimulation extends Simulation {
 	@Override
 	protected void updateGrid() {
 		calculateNextStates();
-		setNextStates();
 		
+		setNextStates();
 		displayGrid();
 	}
 	
@@ -130,15 +129,6 @@ public class FireSimulation extends Simulation {
 		}
 		else {
 			return false;
-		}
-	}
-	
-	private void setNextStates() {
-		for (int row = 0; row < rows; row++) {
-			for (int col = 0; col < columns; col++) {
-				Cell cell = grid.getCell(row, col);
-				cell.setState(nextState[row][col]);
-			}
 		}
 	}
 }
