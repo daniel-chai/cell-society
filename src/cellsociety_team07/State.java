@@ -4,6 +4,8 @@ package cellsociety_team07;
  * This class represents the state that a Cell is in.
  */
 public class State {
+	public static final State OUT_OF_BOUNDS = new State("OUT_OF_BOUNDS");
+	
 	private String s;
 	
 	/**

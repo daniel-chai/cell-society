@@ -6,7 +6,10 @@ import javafx.scene.shape.Rectangle;
  * This class represents a single Cell in a grid.
  */
 public class Cell {
+	public static final Cell OUT_OF_BOUNDS = new Cell(State.OUT_OF_BOUNDS);
 	public static final double CELL_SIZE = 50;
+	
+	private CellView view;
 	
 	private Rectangle rectangle;
 	private State state;
@@ -17,6 +20,8 @@ public class Cell {
 	 * @param state desired State of the Cell
 	 */
 	public Cell(State state) {
+		this.view = new CellView();
+		
 		this.state = state;
 		this.neighborhood = new Neighborhood();
 		initRectangle();
@@ -26,6 +31,13 @@ public class Cell {
 		rectangle = new Rectangle();
 		rectangle.setHeight(CELL_SIZE);
 		rectangle.setWidth(CELL_SIZE);
+	}
+	
+	/**
+	 * @return the View representing the Cell
+	 */
+	public CellView getView() {
+		return view;
 	}
 	
 	/**
@@ -50,10 +62,15 @@ public class Cell {
 	}
 	
 	/**
-	 * Sets the State of the cell
+	 * Sets the State of the cell, checks to make sure the Cell is
+	 * not an OUT_OF_BOUNDS cell by checking the State. The if statement
+	 * makes sure the Cell OUT_OF_BOUNDS constant is immutable
 	 * @param state desired State of the Cell
 	 */
 	public void setState(State state) {
-		this.state = state;
+		if(!this.state.equals(State.OUT_OF_BOUNDS))
+		{
+			this.state = state;
+		}
 	}
 }

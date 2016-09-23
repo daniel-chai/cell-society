@@ -43,13 +43,13 @@ public abstract class Simulation {
 		root.getChildren().add(stepButton);
 	}
 	
-	protected void displayGrid() {
+	protected void displayGrid() {		
 		gridUI = new Group();
 		root.getChildren().add(gridUI);
 		
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < columns; col++) {
-
+				
 				Cell cell = grid.getCell(row, col);
 				Rectangle rect = cell.getRectangle();
 				
@@ -64,7 +64,7 @@ public abstract class Simulation {
 				
 				gridUI.getChildren().add(rect);
 			}
-		}
+		} 
 	}
 	
 	protected void initGrid() {
