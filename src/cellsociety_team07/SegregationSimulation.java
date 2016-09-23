@@ -31,7 +31,7 @@ public class SegregationSimulation extends Simulation {
 		addMenuButton();
 		addStepButton();
 		
-		threshold = 0.3; 	// hard-coded for now
+		threshold = 0.5; 	// hard-coded for now
 		rows = 10;			// hard-coded for now
 		columns = 10;		// hard-coded for now
 		
@@ -77,6 +77,9 @@ public class SegregationSimulation extends Simulation {
 	protected void calculateNeighbors(Cell cell, int row, int col) {
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
+				if (i == 0 && j == 0) {
+					continue;
+				}
 				if (i + row < 0 || i + row >= rows || j + col < 0 || j + col >= columns) {
 					continue;
 				}
@@ -91,7 +94,7 @@ public class SegregationSimulation extends Simulation {
 		List<Point> emptyCells = getEmptyCells();
 		List<Point> cellsToMove = getCellsToMove();
 		moveCells(cellsToMove, emptyCells);
-		updateNeighbors();
+		 
 		displayGrid();
 	}
 	

@@ -68,13 +68,14 @@ public abstract class Simulation {
 	protected void initGrid() {
 		grid = new Grid(rows, columns);		
 		initStates();
-		updateNeighbors();
+		initNeighbors();
+		
 		displayGrid();
 	}
 	
 	protected abstract void initStates();	
 	
-	protected void updateNeighbors() {
+	protected void initNeighbors() {
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < columns; col++) {
 				Cell cell = grid.getCell(row, col);
