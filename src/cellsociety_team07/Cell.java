@@ -6,6 +6,8 @@ import javafx.scene.shape.Rectangle;
  * This class represents a single Cell in a grid.
  */
 public class Cell {
+	public static final double CELL_SIZE = 50;
+	
 	private Rectangle rectangle;
 	private State state;
 	private Neighborhood neighborhood;
@@ -16,9 +18,14 @@ public class Cell {
 	 */
 	public Cell(State state) {
 		this.state = state;
-		
-		this.rectangle = new Rectangle();
 		this.neighborhood = new Neighborhood();
+		initRectangle();
+	}
+	
+	private void initRectangle() {
+		rectangle = new Rectangle();
+		rectangle.setHeight(CELL_SIZE);
+		rectangle.setWidth(CELL_SIZE);
 	}
 	
 	/**

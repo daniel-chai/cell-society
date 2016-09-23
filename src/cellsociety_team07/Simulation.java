@@ -1,8 +1,12 @@
 package cellsociety_team07;
 
+import java.util.Map;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * This class is the abstract superclass for all the different types of simulations. It is meant
@@ -17,6 +21,9 @@ public abstract class Simulation {
 	protected Grid grid;
 	protected int rows;
 	protected int columns;
+	
+	protected Group gridUI;
+	protected Map<State, Color> colorMap;
 	
 	protected Simulation(SceneManager sceneManager) {
 		this.sceneManager = sceneManager;
@@ -34,10 +41,35 @@ public abstract class Simulation {
 		root.getChildren().add(stepButton);
 	}
 	
+	protected void displayGrid() {
+		gridUI = new Group();
+		root.getChildren().add(gridUI);
+		
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < columns; col++) {
+
+				Cell cell = grid.getCell(row, col);
+				Rectangle rect = cell.getRectangle();
+				
+				for (State s : colorMap.keySet()) {
+					if (cell.getState().equals(s)) {
+						rect.setFill(colorMap.get(s));
+					}
+				}
+				
+				rect.setX(100 + col * (Cell.CELL_SIZE + 1));
+				rect.setY(100 + row * (Cell.CELL_SIZE + 1));
+				
+				gridUI.getChildren().add(rect);
+			}
+		}
+	}
+	
 	protected void initGrid() {
-		grid = new Grid(rows, columns);
+		grid = new Grid(rows, columns);		
 		initStates();
 		updateNeighbors();
+		displayGrid();
 	}
 	
 	protected abstract void initStates();	

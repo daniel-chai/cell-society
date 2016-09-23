@@ -2,6 +2,7 @@ package cellsociety_team07;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -34,9 +35,17 @@ public class SegregationSimulation extends Simulation {
 		rows = 10;			// hard-coded for now
 		columns = 10;		// hard-coded for now
 		
+		initColors();
 		initGrid();
 		
 		return simulationScene;
+	}
+	
+	private void initColors() {
+		colorMap = new HashMap<State, Color>();
+		colorMap.put(new State(stateX), Color.BLUE);
+		colorMap.put(new State(stateO), Color.RED);
+		colorMap.put(new State(stateEmpty), Color.LIGHTGREY);
 	}
 	
 	@Override
@@ -83,6 +92,7 @@ public class SegregationSimulation extends Simulation {
 		List<Point> cellsToMove = getCellsToMove();
 		moveCells(cellsToMove, emptyCells);
 		updateNeighbors();
+		displayGrid();
 	}
 	
 	private List<Point> getEmptyCells() {
@@ -140,14 +150,20 @@ public class SegregationSimulation extends Simulation {
 		if (nonEmptyNeighbors == 0) {
 			return true;
 		}
-		return (double) sameStateNeighbors / nonEmptyNeighbors > threshold;
+		return (double) sameStateNeighbors / nonEmptyNeighbors >= threshold;
 	}
 	
 	private void moveCells(List<Point> cellsToMove, List<Point> emptyCells) {
 		for (Point cellPoint : cellsToMove) {
+			if (emptyCells.isEmpty()) {
+				return;
+			}
+			
 			Cell cell = grid.getCell(cellPoint.x, cellPoint.y);
 			
-			Point emptyCellPoint = emptyCells.remove(0);
+			Random r = new Random();
+			int randomEmpty = r.nextInt(emptyCells.size());
+			Point emptyCellPoint = emptyCells.remove(randomEmpty);
 			Cell emptyCell = grid.getCell(emptyCellPoint.x, emptyCellPoint.y);
 			
 			if (cell.getState().equals(new State(stateX))) {
