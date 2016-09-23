@@ -1,8 +1,12 @@
 package cellsociety_team07;
 
+import structure.Structure;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 /**
  * This class is the abstract superclass for all the different types of simulations. It is meant
@@ -14,7 +18,7 @@ public abstract class Simulation {
 	protected Scene simulationScene;
 	protected Group root;
 	
-	protected Grid grid;
+	protected Structure grid;
 	protected int rows;
 	protected int columns;
 	
@@ -31,5 +35,15 @@ public abstract class Simulation {
 	protected void addStepButton() {
 		Button stepButton = UIGenerator.createButton("Show Next Step", 200, 20, 150, 20, 15);
 		root.getChildren().add(stepButton);
+		
+		stepButton.setOnAction(event -> testGrid());
+	}
+	
+	public void testGrid()
+	{
+		int randI = (int)(Math.random() * grid.getHeight());
+		int randJ = (int)(Math.random() * grid.getWidth());
+		
+		grid.getCell(randI, randJ).getView().setColor(Color.YELLOW);
 	}
 }

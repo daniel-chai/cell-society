@@ -1,7 +1,4 @@
 package cellsociety_team07;
-
-import javafx.scene.Node;
-
 /**
  * This class represents a single Cell in a grid.
  */
@@ -47,10 +44,15 @@ public class Cell{
 	}
 	
 	/**
-	 * Sets the State of the cell
+	 * Sets the State of the cell, checks to make sure the Cell is
+	 * not an OUT_OF_BOUNDS cell by checking the State. The if statement
+	 * makes sure the Cell OUT_OF_BOUNDS constant is immutable
 	 * @param state desired State of the Cell
 	 */
 	public void setState(State state) {
-		this.state = state;
+		if(!this.state.equals(State.OUT_OF_BOUNDS))
+		{
+			this.state = state;
+		}
 	}
 }

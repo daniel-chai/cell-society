@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
 /**
@@ -29,12 +30,12 @@ public class SegregationSimulation extends Simulation {
 		
 		rows = 10;			// hard-coded for now
 		columns = 10;		// hard-coded for now
-		initGrid();
+		initStructure();
 		
 		return simulationScene;
 	}
 	
-	private void initGrid() {
+	private void initStructure() {
 		grid = new Grid(rows, columns);
 		initStates();
 		initNeighbors();
@@ -86,7 +87,11 @@ public class SegregationSimulation extends Simulation {
 		}
 	}
 	
-	private void displayGrid() {
-		// display the grid on the Scene
+	private void displayGrid() 
+	{
+		Node node = grid.generateView(300, 300);
+		node.setLayoutX(100);
+		node.setLayoutY(100);
+		root.getChildren().add(node);
 	}
 }

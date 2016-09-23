@@ -6,8 +6,6 @@ import structure.Structure;
  */
 public class Grid extends Structure
 {
-	private Cell[][] grid;
-	
 	/**
 	 * Constructor for Grid class
 	 * @param rows number of rows in the grid
@@ -16,14 +14,4 @@ public class Grid extends Structure
 	public Grid(int rows, int columns) {
 		super(rows,columns);
 	}
-	
-	/**
-	 * @param row the row of the Cell
-	 * @param col the column of the Cell
-	 * @return the Cell at the specified row and column
-	 */
-	public Cell getCell(int row, int col) {
-		return grid[row][col];
-	}
-	
 }

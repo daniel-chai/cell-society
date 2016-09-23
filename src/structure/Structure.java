@@ -5,8 +5,8 @@ import java.awt.Point;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
+import javafx.scene.Node;
 
 /**
  * This class represents the structure the Cellular Automata is ran on
@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 public class Structure implements Iterable<Cell>
 {
 	private Cell[][] board;
+	private StructureView view;
 	
 	/**
 	 * Convenience constructor that creates a width*height board with no bounds
@@ -24,6 +25,7 @@ public class Structure implements Iterable<Cell>
 	public Structure(int width,int height)
 	{
 		this(width,height,new ArrayList<Point>());
+		view = new StructureView(board);
 	}
 	
 	/**
@@ -37,7 +39,14 @@ public class Structure implements Iterable<Cell>
 		board = new Cell[width][height];
 		defineOutOfBounds(outOfBounds);
 	}
+	// I DON'T THINK THIS CODE BELONGS HERE-----------------START----
+	public Node generateView(int width,int height)
+	{
+		view.setSizeOfView(width, height);
+		return view.getNode();
+	}
 	
+	// I DON't THINK THIS CODE BELONGS HERE------------------END-----
 	/**
 	 * Places a Cell at point p if that cell is in bounds
 	 * @param cell the Cell that is being placed
@@ -49,6 +58,17 @@ public class Structure implements Iterable<Cell>
 		{
 			board[p.x][p.y] = cell;
 		}
+	}
+	
+	/**
+	 * Convenience method to add a cell
+	 * @param cell - the Cell that is being placed
+	 * @param i - the x coordinate (typically the height in a board)
+	 * @param j = the y coordinate (typically the width in a board)
+	 */
+	public void addCell(Cell cell, int i, int j)
+	{
+		addCell(cell,new Point(i,j));
 	}
 	
 	/**
@@ -78,7 +98,22 @@ public class Structure implements Iterable<Cell>
 		return new StructureIterator(board);
 	}
 	
-	private Cell getCellFromPoint(Point p)
+	/**
+	 * Returns Cell at (i,j)
+	 * @param i
+	 * @param j
+	 */
+	public Cell getCell(int i, int j)
+	{
+		return getCellFromPoint(new Point(i,j));
+	}
+	
+	/**
+	 * Retrieves a Cell from a specific point
+	 * @param p point the Cell is located at
+	 * @return the Cell at point p
+	 */
+	public Cell getCellFromPoint(Point p)
 	{
 		return board[p.x][p.y];
 	}
@@ -90,22 +125,6 @@ public class Structure implements Iterable<Cell>
 			board[location.x][location.y] = Cell.OUT_OF_BOUNDS;
 		}
 	}
-	
-	/**
-	 * @return a copy of the board class so that other classes can't change its data
-	 */
-	private Cell[][] getCopyOfBoard()
-	{
-		Cell[][] copyOfBoard = new Cell[board.length][board[0].length];
-		
-		for(int i = 0; i < copyOfBoard[0].length; i++)
-		{
-			copyOfBoard[i] = Arrays.copyOf(board[i], board[i].length);
-		}
-		
-		return copyOfBoard;	
-	}
-	
 	
 	private class StructureIterator implements Iterator<Cell>
 	{
