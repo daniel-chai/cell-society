@@ -2,6 +2,7 @@ package cellsociety_team07;
 
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
@@ -18,7 +19,7 @@ public class CellView implements Viewable
 	 */
 	public CellView()
 	{
-		view = new Circle(WIDTH/2);
+		view = new Rectangle(WIDTH,WIDTH);
 	}
 	
 	/**
@@ -47,7 +48,8 @@ public class CellView implements Viewable
 	 */
 	public void setWidth(int width)
 	{
-		((Circle)view).setRadius(width/2);
+		((Rectangle)view).setWidth(width);
+		((Rectangle)view).setHeight(width);
 	}
 	
 	public Node getNode()
