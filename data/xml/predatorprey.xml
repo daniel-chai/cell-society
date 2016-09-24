@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><Data dataType="predatorprey">
+	<title>Predator-Prey</title><author>A.K. Dewdney</author>
+	<numRows>50</numRows>
+	<numCols>50</numCols>
+	<FishTurnsToBreed>20</FishTurnsToBreed>
+	<FishTurnsToStarve>5</FishTurnsToStarve>
+	<SharkTurnsToBreed>20</SharkTurnsToBreed>
+	<SharkTurnsToStarve>5</SharkTurnsToStarve></Data>

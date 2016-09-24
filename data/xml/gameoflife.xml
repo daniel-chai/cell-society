@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><Data dataType="gameoflife">
+	<title>Conway's Game of Life</title><author>John Conway</author>
+	<numRows>50</numRows>
+	<numCols>50</numCols></Data>
