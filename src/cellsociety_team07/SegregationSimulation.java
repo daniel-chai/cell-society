@@ -26,21 +26,9 @@ public class SegregationSimulation extends Simulation {
 		this.columns = Integer.parseInt(columns);
 		this.threshold = Double.parseDouble(threshold);
 	}
-
-	public Scene init() {
-		root = new Group();
-		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
-		
-		addMenuButton();
-		addStepButton();
-		
-		initColors();
-		initGrid();
-		
-		return simulationScene;
-	}
 	
-	private void initColors() {
+	@Override
+	protected void initColors() {
 		colorMap = new HashMap<State, Color>();
 		colorMap.put(new State(stateX), Color.BLUE);
 		colorMap.put(new State(stateO), Color.RED);

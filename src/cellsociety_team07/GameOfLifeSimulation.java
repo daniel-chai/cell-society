@@ -22,20 +22,8 @@ public class GameOfLifeSimulation extends Simulation {
 		this.columns = Integer.parseInt(columns);
 	}
 
-	public Scene init() {
-		root = new Group();
-		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
-		
-		addMenuButton();
-		addStepButton();
-		
-		initColors();
-		initGrid();
-		
-		return simulationScene;
-	}
-
-	private void initColors() {
+	@Override
+	protected void initColors() {
 		colorMap = new HashMap<State, Color>();
 		colorMap.put(new State(stateAlive), Color.BLACK);
 		colorMap.put(new State(stateDead), Color.LIGHTGREY);	

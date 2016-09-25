@@ -30,20 +30,8 @@ public class FireSimulation extends Simulation {
 		this.startCell = new Point(Integer.parseInt(startCell.substring(0, index)), Integer.parseInt(startCell.substring(index + 2)));
 	}
 	
-	public Scene init() {
-		root = new Group();
-		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
-		
-		addMenuButton();
-		addStepButton();
-		
-		initColors();
-		initGrid();
-		
-		return simulationScene;
-	}
-	
-	private void initColors() {
+	@Override
+	protected void initColors() {
 		colorMap = new HashMap<State, Color>();
 		colorMap.put(new State(stateEmpty), Color.YELLOW);
 		colorMap.put(new State(stateBurning), Color.RED);

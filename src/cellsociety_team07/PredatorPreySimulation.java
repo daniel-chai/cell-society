@@ -32,25 +32,8 @@ public class PredatorPreySimulation extends Simulation {
 		this.sharkTurnsToBreed = Integer.parseInt(sharkTurnsToBreed);
 	}
 	
-	public Scene init() {
-		root = new Group();
-		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
-		
-		addMenuButton();
-		addStepButton();
-		
-		fishTurnsToBreed = 3;		// hard-coded for now
-		sharkTurnsToBreed = 10;		// hard-coded for now
-		rows = 10;			// hard-coded for now
-		columns = 10;		// hard-coded for now
-		
-		initColors();
-		initGrid();
-		
-		return simulationScene;
-	}
-	
-	private void initColors() {
+	@Override
+	protected void initColors() {
 		colorMap = new HashMap<State, Color>();
 		colorMap.put(new State(stateEmpty), Color.BLUE);
 		colorMap.put(new State(stateFish), Color.GREEN);
