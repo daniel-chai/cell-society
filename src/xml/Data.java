@@ -2,9 +2,6 @@ package xml;
 
 /**
  * A value object for a Person.
- *
- * @author Rhondu Smithwick
- * @author Robert Duvall
  */
 public abstract class Data {
     private String myDataType;
@@ -13,7 +10,6 @@ public abstract class Data {
     private String myNumRows;
     private String myNumCols;
     private String myThreshold;
-    
     
     public abstract String getMyDataType();
 

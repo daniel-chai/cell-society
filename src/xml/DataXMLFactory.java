@@ -8,9 +8,6 @@ import java.util.Objects;
 
 /**
  * An XMLFactory that gives back a Person object.
- *
- * @author Rhondu Smithwick
- * @author Robert Duvall
  */
 public class DataXMLFactory extends XMLFactory {
 
@@ -22,7 +19,7 @@ public class DataXMLFactory extends XMLFactory {
             throw new XMLFactoryException("XML file does not represent valid data");
             }
         String dataType = getAttribute(root, "dataType");
-        //System.out.println(dataType);
+        
         if(dataType.equals("segregation")){
             return getSegregationData(root);
         }
@@ -84,7 +81,6 @@ public class DataXMLFactory extends XMLFactory {
 
     @Override
     protected boolean isValidFile (Element root) {
-        // TODO Auto-generated method stub
         return true;
     }
 }

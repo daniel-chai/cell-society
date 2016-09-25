@@ -40,7 +40,7 @@ public class DataInput {
 		return dataInputScene;
 	}
 	
-	 public static void main (String[] args) throws XMLFactoryException {
+	 public static void main(String[] args) throws XMLFactoryException {
 	        XMLParser parser = new XMLParser();
 	        DataXMLFactory factory = new DataXMLFactory();
 	        File folder = new File(XML_FILES_LOCATION);

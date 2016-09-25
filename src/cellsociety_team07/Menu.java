@@ -32,6 +32,7 @@ public class Menu {
 		menuScene = new Scene(root, Main.SIZE, Main.SIZE, Color.AZURE);
 		
 		addSimulationStartButtons();
+		addDataInputButton();
 		
 		return menuScene;
 	}
@@ -53,5 +54,12 @@ public class Menu {
 		root.getChildren().add(predatorPreyBtn);
 		root.getChildren().add(fireBtn);
 		root.getChildren().add(gameOfLifeBtn);
+	}
+	
+	private void addDataInputButton() {
+		Button dataInputButton = UIGenerator.createButton("Input XML Data", 50, 300);
+		dataInputButton.setOnAction(e -> sceneManager.goToDataInputScene(sceneManager));
+		
+		root.getChildren().add(dataInputButton);
 	}
 }

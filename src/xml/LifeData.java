@@ -20,19 +20,16 @@ public class LifeData extends Data{
 
     @Override
     public String getMyDataType () {
-        // TODO Auto-generated method stub
         return myDataType;
     }
 
     @Override
     public String getMyTitle () {
-        // TODO Auto-generated method stub
         return myTitle;
     }
 
     @Override
     public String getMyAuthor () {
-        // TODO Auto-generated method stub
         return myAuthor;
     }
     

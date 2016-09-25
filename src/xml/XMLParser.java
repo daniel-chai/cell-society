@@ -11,9 +11,6 @@ import java.io.IOException;
 
 /**
  * Handles parsing XML files by returning the root elements.
- *
- * @author Rhondu Smithwick
- * @author Robert Duvall
  */
 public class XMLParser {
     // Keep only one documentBuilder around because it is expensive to make and just need to reset it before every parse

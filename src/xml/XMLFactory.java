@@ -9,9 +9,6 @@ import org.w3c.dom.NodeList;
  * <p>
  * Most this class factors out common methods from more specific XML factories.
  * </p>
- *
- * @author Rhondu Smithwick
- * @author Robert Duvall
  */
 public abstract class XMLFactory {
     /**
@@ -44,7 +41,6 @@ public abstract class XMLFactory {
             return nodeList.item(0).getTextContent();
         }
         else {
-            // BUGBUG: return empty string or null, is it an error to not find the text value?
             return "";
         }
     }

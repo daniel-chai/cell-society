@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><Data dataType="segregation">
 	<title>Schelling's Model Of Segregation</title><author>Schelling</author>
-	<numRows>50</numRows>
-	<numCols>50</numCols>
-	<threshold>0.4</threshold></Data>
+	<numRows>10</numRows>
+	<numCols>10</numCols>
+	<threshold>0.5</threshold></Data>

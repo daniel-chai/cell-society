@@ -3,8 +3,6 @@ package xml;
 
 /**
  * This class represents what might go wrong when using XML files.
- * 
- * @author Robert Duvall
  */
 public class XMLFactoryException extends Exception {
     // for serialization

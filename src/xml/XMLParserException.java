@@ -3,8 +3,6 @@ package xml;
 
 /**
  * This class represents what might go wrong when using XML files.
- * 
- * @author Robert Duvall
  */
 public class XMLParserException extends RuntimeException {
     // for serialization
