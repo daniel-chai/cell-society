@@ -1,7 +1,17 @@
 package cellsociety_team07;
 
+import java.io.File;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import xml.Data;
+import xml.DataXMLFactory;
+import xml.FireData;
+import xml.LifeData;
+import xml.PredData;
+import xml.SegregationData;
+import xml.XMLFactoryException;
+import xml.XMLParser;
 
 /**
  * This class handles all the scene changes. In the whole application, there is only one Stage that is 
@@ -14,6 +24,9 @@ import javafx.stage.Stage;
  * a parameter.
  */
 public class SceneManager {
+	private static final String XML_FILES_LOCATION = "data/xml/";
+	private static final String XML_SUFFIX = ".xml";
+	
 	private Stage stage;
 	
 	/**
@@ -36,21 +49,14 @@ public class SceneManager {
 	}
 	
 	/**
-	 * Sets the scene to be the DataInputScene
-	 * @param sceneManager SceneManager currently being used
-	 */
-	public void goToDataInputScene(SceneManager sceneManager) {
-		DataInput dataInput = new DataInput(sceneManager);
-		Scene dataInputScene = dataInput.init();
-		stage.setScene(dataInputScene);
-	}
-	
-	/**
 	 * Sets the scene to be the Segregation simulation Scene
 	 * @param sceneManager SceneManager currently being used
 	 */
 	public void goToSegregationScene(SceneManager sceneManager) {
-		SegregationSimulation simulation = new SegregationSimulation(sceneManager);
+		SegregationData data = (SegregationData) getInputData("Schelling's Model Of Segregation");
+		
+		SegregationSimulation simulation = new SegregationSimulation(sceneManager, 
+				data.getMyNumRows(), data.getMyNumCols(), data.getMyThreshold());
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
@@ -60,7 +66,10 @@ public class SceneManager {
 	 * @param sceneManager SceneManager currently being used
 	 */
 	public void goToPredatorPreyScene(SceneManager sceneManager) {
-		PredatorPreySimulation simulation = new PredatorPreySimulation(sceneManager);
+		PredData data = (PredData) getInputData("Predator-Prey");
+		
+		PredatorPreySimulation simulation = new PredatorPreySimulation(sceneManager,
+				data.getMyNumRows(), data.getMyNumCols(), data.getMyFishBreed(), data.getMySharkBreed());
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
@@ -70,7 +79,10 @@ public class SceneManager {
 	 * @param sceneManager SceneManager currently being used
 	 */
 	public void goToFireScene(SceneManager sceneManager) {
-		FireSimulation simulation = new FireSimulation(sceneManager);
+		FireData data = (FireData) getInputData("Spreading Of Fire");
+		
+		FireSimulation simulation = new FireSimulation(sceneManager, 
+				data.getMyNumRows(), data.getMyNumCols(), data.getMyProbCatch(), data.getMyInitialFire());
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
@@ -80,8 +92,33 @@ public class SceneManager {
 	 * @param sceneManager SceneManager currently being used
 	 */
 	public void goToGameOfLifeScene(SceneManager sceneManager) {
-		GameOfLifeSimulation simulation = new GameOfLifeSimulation(sceneManager);
+		LifeData data = (LifeData) getInputData("Conway's Game of Life");
+		
+		GameOfLifeSimulation simulation = new GameOfLifeSimulation(sceneManager,
+				data.getMyNumRows(), data.getMyNumCols());
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
+	}
+	
+	private Data getInputData(String title) {
+		XMLParser parser = new XMLParser();
+	    DataXMLFactory factory = new DataXMLFactory();
+	    File folder = new File(XML_FILES_LOCATION);
+	    
+		for (File f : folder.listFiles()) {
+			if (f.isFile() && f.getName().endsWith(XML_SUFFIX)) {
+				try {
+					Data d = factory.getData(parser.getRootElement(f.getAbsolutePath()));
+					if (d.getMyTitle().equals(title)) {
+						return d;
+					}
+				} catch (XMLFactoryException e) {
+					System.err.println("Reading file " + f.getPath());
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return null;
 	}
 }

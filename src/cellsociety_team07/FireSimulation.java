@@ -18,9 +18,16 @@ public class FireSimulation extends Simulation {
 	private static final String stateTree = "TREE";
 	
 	private double probCatch;
+	private Point startCell;
 	
-	public FireSimulation(SceneManager sceneManager) {
+	public FireSimulation(SceneManager sceneManager, String rows, String columns, String probCatch, String startCell) {
 		super(sceneManager);
+		this.rows = Integer.parseInt(rows);
+		this.columns = Integer.parseInt(columns);
+		this.probCatch = Double.parseDouble(probCatch);
+		
+		int index = startCell.indexOf(',');
+		this.startCell = new Point(Integer.parseInt(startCell.substring(0, index)), Integer.parseInt(startCell.substring(index + 2)));
 	}
 	
 	public Scene init() {
@@ -29,10 +36,6 @@ public class FireSimulation extends Simulation {
 		
 		addMenuButton();
 		addStepButton();
-		
-		probCatch = 0.5;	// hard-coded for now
-		rows = 10;			// hard-coded for now
-		columns = 10;		// hard-coded for now
 		
 		initColors();
 		initGrid();
@@ -57,7 +60,7 @@ public class FireSimulation extends Simulation {
 		}
 		
 		Cell cell = new Cell(new State(stateBurning));
-		grid.addCell(cell, 5, 5);		// hard-coded for now
+		grid.addCell(cell, startCell.x, startCell.y);		
 	}
 
 	@Override

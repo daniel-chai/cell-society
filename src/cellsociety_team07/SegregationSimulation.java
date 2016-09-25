@@ -20,8 +20,11 @@ public class SegregationSimulation extends Simulation {
 	
 	private double threshold;
 	
-	public SegregationSimulation(SceneManager sceneManager) {
+	public SegregationSimulation(SceneManager sceneManager, String rows, String columns, String threshold) {
 		super(sceneManager);
+		this.rows = Integer.parseInt(rows);
+		this.columns = Integer.parseInt(columns);
+		this.threshold = Double.parseDouble(threshold);
 	}
 
 	public Scene init() {
@@ -30,10 +33,6 @@ public class SegregationSimulation extends Simulation {
 		
 		addMenuButton();
 		addStepButton();
-		
-		threshold = 0.5; 	// hard-coded for now
-		rows = 10;			// hard-coded for now
-		columns = 10;		// hard-coded for now
 		
 		initColors();
 		initGrid();

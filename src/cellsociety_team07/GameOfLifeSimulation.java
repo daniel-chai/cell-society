@@ -16,8 +16,10 @@ public class GameOfLifeSimulation extends Simulation {
 	private static final String stateAlive = "ALIVE";
 	private static final String stateDead = "DEAD";
 	
-	public GameOfLifeSimulation(SceneManager sceneManager) {
+	public GameOfLifeSimulation(SceneManager sceneManager, String rows, String columns) {
 		super(sceneManager);
+		this.rows = Integer.parseInt(rows);
+		this.columns = Integer.parseInt(columns);
 	}
 
 	public Scene init() {
@@ -26,9 +28,6 @@ public class GameOfLifeSimulation extends Simulation {
 		
 		addMenuButton();
 		addStepButton();
-		
-		rows = 10;			// hard-coded for now
-		columns = 10;		// hard-coded for now
 		
 		initColors();
 		initGrid();
