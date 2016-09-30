@@ -7,11 +7,7 @@ package xml;
  * @author Robert Duvall
  */
 public class SegregationData extends Data{
-    private String myDataType;
-    private String myTitle;
-    private String myAuthor;
-    private String myNumRows;
-    private String myNumCols;
+
     private String myThreshold;
     
     public SegregationData (String title,
@@ -20,34 +16,13 @@ public class SegregationData extends Data{
                  String numCols,
                  String threshold) {
         
-        myTitle = title;
-        myAuthor = author;
-        myNumRows = numRows;
-        myNumCols = numCols;
+        super.setMyTitle(title);
+        super.setMyAuthor(author);
+        super.setMyNumRows(numRows);
+        super.setMyNumCols(numCols);
         myThreshold = threshold;
     }
-    
-
-    public String getMyDataType () {
-        return myDataType;
-    }
-
-    public String getMyTitle () {
-        return myTitle;
-    }
-
-    public String getMyAuthor () {
-        return myAuthor;
-    }
-
-    public String getMyNumRows () {
-        return myNumRows;
-    }
-
-    public String getMyNumCols () {
-        return myNumCols;
-    }
-
+   
     public String getMyThreshold () {
         return myThreshold;
     }
@@ -56,10 +31,10 @@ public class SegregationData extends Data{
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
-              .append("title='").append(getMyTitle()).append("', ")
-              .append("author='").append((getMyAuthor())).append("', ")
-              .append("numRows='").append((getMyNumRows())).append("', ")
-              .append("numCols='").append((getMyNumCols())).append("', ")
+              .append("title='").append(super.getMyTitle()).append("', ")
+              .append("author='").append((super.getMyAuthor())).append("', ")
+              .append("numRows='").append((super.getMyNumRows())).append("', ")
+              .append("numCols='").append((super.getMyNumCols())).append("', ")
               .append("threshold='").append(getMyThreshold()).append("'")
               .append('}');
        return result.toString();

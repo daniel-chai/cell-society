@@ -32,9 +32,24 @@ public class DataXMLFactory extends XMLFactory {
         else if(dataType.equals("predatorprey")){
             return getPredData(root);
         }
+
+        else
+        {
+            checkError(dataType);
+        }
+        
         return null; 
     }
     
+    private void checkError (String dataType) {
+        if(dataType.equals("")){
+            System.out.println("No datatype given in file.");
+        }
+        else{
+            System.out.println("Data type not supported.");
+        }
+    }
+
     private PredData getPredData(Element root) throws XMLFactoryException{
         String title = getTextValue(root, "title");
         String author = getTextValue(root, "author");

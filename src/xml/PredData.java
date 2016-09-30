@@ -2,11 +2,6 @@ package xml;
 
 public class PredData extends Data{
 
-    private String myDataType;
-    private String myTitle;
-    private String myAuthor;
-    private String myNumRows;
-    private String myNumCols;
     private String myFishBreed;
     private String mySharkBreed;
     private String myFishStarve;
@@ -21,10 +16,10 @@ public class PredData extends Data{
                  String fishStarve,
                  String sharkStarve){
         
-        myTitle = title;
-        myAuthor = author;
-        myNumRows = numRows;
-        myNumCols = numCols;
+        super.setMyTitle(title);
+        super.setMyAuthor(author);
+        super.setMyNumRows(numRows);
+        super.setMyNumCols(numCols);
         myFishBreed = fishBreed;
         mySharkBreed = sharkBreed;
         myFishStarve = fishStarve;
@@ -32,27 +27,6 @@ public class PredData extends Data{
         
     }
     
-
-    public String getMyDataType () {
-        return myDataType;
-    }
-
-    public String getMyTitle () {
-        return myTitle;
-    }
-
-    public String getMyAuthor () {
-        return myAuthor;
-    }
-
-    public String getMyNumRows () {
-        return myNumRows;
-    }
-
-    public String getMyNumCols () {
-        return myNumCols;
-    }
-
 
     public String getMyFishBreed () {
         return myFishBreed;
@@ -73,10 +47,10 @@ public class PredData extends Data{
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
-              .append("title='").append(getMyTitle()).append("', ")
-              .append("author='").append((getMyAuthor())).append("', ")
-              .append("numRows='").append((getMyNumRows())).append("', ")
-              .append("numCols='").append((getMyNumCols())).append("', ")
+              .append("title='").append(super.getMyTitle()).append("', ")
+              .append("author='").append((super.getMyAuthor())).append("', ")
+              .append("numRows='").append((super.getMyNumRows())).append("', ")
+              .append("numCols='").append((super.getMyNumCols())).append("', ")
               .append("fishBreed='").append((getMyFishBreed())).append("', ")
               .append("fishStarve='").append((getMyFishStarve())).append("', ")
               .append("sharkBreed='").append((getMySharkBreed())).append("', ")

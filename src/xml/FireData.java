@@ -1,11 +1,7 @@
 package xml;
 
 public class FireData extends Data{
-    private String myDataType;
-    private String myTitle;
-    private String myAuthor;
-    private String myNumRows;
-    private String myNumCols;
+
     private String myProbCatch;
     private String myInitialFire;
     
@@ -16,35 +12,14 @@ public class FireData extends Data{
                  String probCatch, 
                  String initialFire) {
         
-        myTitle = title;
-        myAuthor = author;
-        myNumRows = numRows;
-        myNumCols = numCols;
+        super.setMyTitle(title);
+        super.setMyAuthor(author);
+        super.setMyNumRows(numRows);
+        super.setMyNumCols(numCols);
         myProbCatch = probCatch;
         myInitialFire = initialFire;
     }
-    
-
-    public String getMyDataType () {
-        return myDataType;
-    }
-
-    public String getMyTitle () {
-        return myTitle;
-    }
-
-    public String getMyAuthor () {
-        return myAuthor;
-    }
-
-    public String getMyNumRows () {
-        return myNumRows;
-    }
-
-    public String getMyNumCols () {
-        return myNumCols;
-    }
-
+   
     public String getMyProbCatch () {
         return myProbCatch;
     }
@@ -53,14 +28,13 @@ public class FireData extends Data{
         return myInitialFire;
     }
 
-
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
-              .append("title='").append(getMyTitle()).append("', ")
-              .append("author='").append((getMyAuthor())).append("', ")
-              .append("numRows='").append((getMyNumRows())).append("', ")
-              .append("numCols='").append((getMyNumCols())).append("', ")
+              .append("title='").append(super.getMyTitle()).append("', ")
+              .append("author='").append((super.getMyAuthor())).append("', ")
+              .append("numRows='").append((super.getMyNumRows())).append("', ")
+              .append("numCols='").append((super.getMyNumCols())).append("', ")
               .append("probCatch='").append(getMyProbCatch()).append("', ")
               .append("initialFire='").append(getMyInitialFire()).append("'")
               .append('}');
