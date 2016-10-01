@@ -1,11 +1,5 @@
 package xml;
 
-/**
- * A value object for a Person.
- *
- * @author Rhondu Smithwick
- * @author Robert Duvall
- */
 public class SegregationData extends Data{
     private String myDataType;
     private String myTitle;
@@ -27,32 +21,34 @@ public class SegregationData extends Data{
         myThreshold = threshold;
     }
     
-
+    @Override
     public String getMyDataType () {
         return myDataType;
     }
 
+    @Override
     public String getMyTitle () {
         return myTitle;
     }
 
+    @Override
     public String getMyAuthor () {
         return myAuthor;
     }
 
-    public String getMyNumRows () {
-        return myNumRows;
+    public int getMyNumRows () {
+        return Integer.parseInt(myNumRows);
     }
 
-    public String getMyNumCols () {
-        return myNumCols;
+    public int getMyNumCols () {
+        return Integer.parseInt(myNumCols);
     }
 
-    public String getMyThreshold () {
-        return myThreshold;
+    public double getMyThreshold () {
+        return Double.parseDouble(myThreshold);
     }
 
-
+    @Override
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
