@@ -11,6 +11,8 @@ import ui_components.ButtonBuilder;
 
 /**
  * This class represents the Menu Scene from where a simulation can be started.
+ * 
+ * @author Daniel Chai
  */
 public class Menu {
 	private Scene menuScene;

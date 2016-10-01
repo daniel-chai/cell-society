@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 
 /**
  * This class implements the Segregation simulation.
+ * 
+ * @author Daniel Chai
  */
 public class SegregationSimulation extends Simulation {
 	private static final String stateX = "X";

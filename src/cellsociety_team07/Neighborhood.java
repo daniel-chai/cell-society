@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * This class represents the neighboring Cells of a particular Cell.
+ * 
+ * @author Daniel Chai
  */
 public class Neighborhood {
 	private List<Cell> neighbors;

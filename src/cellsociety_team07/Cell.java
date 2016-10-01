@@ -4,6 +4,8 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * This class represents a single Cell in a grid.
+ * 
+ * @author Daniel Chai
  */
 public class Cell {
 	public static final Cell OUT_OF_BOUNDS = new Cell(State.OUT_OF_BOUNDS);

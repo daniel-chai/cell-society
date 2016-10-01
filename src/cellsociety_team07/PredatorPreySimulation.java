@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 
 /**
  * This class implements the Predator-Prey simulation.
+ * 
+ * @author Daniel Chai
  */
 public class PredatorPreySimulation extends Simulation {
 	private static final String stateEmpty = "EMPTY";

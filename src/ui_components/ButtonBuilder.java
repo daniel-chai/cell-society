@@ -5,6 +5,8 @@ import javafx.scene.text.Font;
 
 /**
  * This class represents a common JavaFX Button component.
+ * 
+ * @author Daniel Chai
  */
 public class ButtonBuilder {
 	private Button button;

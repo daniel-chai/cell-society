@@ -14,6 +14,8 @@ import xml.SegregationData;
  * This class handles all the scene changes. In the whole application, there is only one Stage that is 
  * used. That is why this class takes in the primaryStage as a parameter in the constructor. All the 
  * scene changes are done on this Stage. 
+ * 
+ * @author Daniel Chai
  */
 public class SceneManager {
 	private static final String SEGREGATION = "Schelling's Model Of Segregation";

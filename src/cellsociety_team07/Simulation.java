@@ -19,6 +19,8 @@ import ui_components.ButtonBuilder;
  * This class is the abstract superclass for all the different types of simulations. It is meant
  * to be extended. Each particular simulation has different rules, so each particular simulation
  * will extend this Simulation superclass and implement its own rules.
+ * 
+ * @author Daniel Chai
  */
 public abstract class Simulation {
     private static final int MILLISECOND_DELAY = 500;

@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 
 /**
  * This class implements the Fire simulation.
+ * 
+ * @author Daniel Chai
  */
 public class FireSimulation extends Simulation {
 	private static final String stateEmpty = "EMPTY";

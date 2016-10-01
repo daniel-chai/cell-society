@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 
 /**
  * This class is the entry point to the application.
+ * 
+ * @author Daniel Chai
  */
 public class Main extends Application {
 	public static final String TITLE = "CellSociety";

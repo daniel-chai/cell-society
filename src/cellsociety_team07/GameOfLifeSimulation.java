@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 
 /**
  * This class implements the Game-of-Life simulation
+ * 
+ * @author Daniel Chai
  */
 public class GameOfLifeSimulation extends Simulation {
 	private static final String stateAlive = "ALIVE";

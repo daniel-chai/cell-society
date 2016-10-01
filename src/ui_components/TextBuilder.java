@@ -5,6 +5,8 @@ import javafx.scene.text.Text;
 
 /**
  * This class represents a common JavaFX Text component.
+ * 
+ * @author Daniel Chai
  */
 public class TextBuilder {
 	private Text text;
