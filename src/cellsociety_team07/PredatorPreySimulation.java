@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 
 /**
@@ -24,12 +24,10 @@ public class PredatorPreySimulation extends Simulation {
 	private int turnsSinceLastFishBreed = 0;
 	private int turnsSinceLastSharkBreed = 0;
 	
-	public PredatorPreySimulation(SceneManager sceneManager, String rows, String columns, String fishTurnsToBreed, String sharkTurnsToBreed) {
-		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
-		this.fishTurnsToBreed = Integer.parseInt(fishTurnsToBreed);
-		this.sharkTurnsToBreed = Integer.parseInt(sharkTurnsToBreed);
+	public PredatorPreySimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns, int fishTurnsToBreed, int sharkTurnsToBreed) {
+		super(goToMenu, rows, columns);
+		this.fishTurnsToBreed = fishTurnsToBreed;
+		this.sharkTurnsToBreed = sharkTurnsToBreed;
 	}
 	
 	@Override

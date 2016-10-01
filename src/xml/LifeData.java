@@ -33,12 +33,12 @@ public class LifeData extends Data{
         return myAuthor;
     }
     
-    public String getMyNumRows () {
-        return myNumRows;
+    public int getMyNumRows () {
+        return Integer.parseInt(myNumRows);
     }
 
-    public String getMyNumCols () {
-        return myNumCols;
+    public int getMyNumCols () {
+        return Integer.parseInt(myNumCols);
     }
     
     @Override

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 
 /**
@@ -20,11 +20,9 @@ public class SegregationSimulation extends Simulation {
 	
 	private double threshold;
 	
-	public SegregationSimulation(SceneManager sceneManager, String rows, String columns, String threshold) {
-		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
-		this.threshold = Double.parseDouble(threshold);
+	public SegregationSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns, double threshold) {
+		super(goToMenu, rows, columns);
+		this.threshold = threshold;
 	}
 	
 	@Override

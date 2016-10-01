@@ -32,44 +32,46 @@ public class PredData extends Data{
         
     }
     
-
+    @Override
     public String getMyDataType () {
         return myDataType;
     }
 
+    @Override
     public String getMyTitle () {
         return myTitle;
     }
 
+    @Override
     public String getMyAuthor () {
         return myAuthor;
     }
 
-    public String getMyNumRows () {
-        return myNumRows;
+    public int getMyNumRows () {
+        return Integer.parseInt(myNumRows);
     }
 
-    public String getMyNumCols () {
-        return myNumCols;
+    public int getMyNumCols () {
+        return Integer.parseInt(myNumCols);
     }
 
-
-    public String getMyFishBreed () {
-        return myFishBreed;
+    public int getMyFishBreed () {
+        return Integer.parseInt(myFishBreed);
     }
 
-    public String getMySharkBreed () {
-        return mySharkBreed;
+    public int getMySharkBreed () {
+        return Integer.parseInt(mySharkBreed);
     }
     
-    public String getMyFishStarve () {
-        return myFishStarve;
+    public int getMyFishStarve () {
+        return Integer.parseInt(myFishStarve);
     }
 
-    public String getMySharkStarve () {
-        return mySharkStarve;
+    public int getMySharkStarve () {
+        return Integer.parseInt(mySharkStarve);
     }
 
+    @Override
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")

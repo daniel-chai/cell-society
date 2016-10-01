@@ -1,5 +1,7 @@
 package xml;
 
+import java.awt.Point;
+
 public class FireData extends Data{
     private String myDataType;
     private String myTitle;
@@ -24,36 +26,44 @@ public class FireData extends Data{
         myInitialFire = initialFire;
     }
     
-
+    @Override
     public String getMyDataType () {
         return myDataType;
     }
 
+    @Override
     public String getMyTitle () {
         return myTitle;
     }
-
+    
+    @Override
     public String getMyAuthor () {
         return myAuthor;
     }
 
-    public String getMyNumRows () {
-        return myNumRows;
+    public int getMyNumRows () {
+        return Integer.parseInt(myNumRows);
     }
 
-    public String getMyNumCols () {
-        return myNumCols;
+    public int getMyNumCols () {
+        return Integer.parseInt(myNumCols);
     }
 
-    public String getMyProbCatch () {
-        return myProbCatch;
+    public double getMyProbCatch () {
+        return Double.parseDouble(myProbCatch);
     }
     
-    public String getMyInitialFire() {
-        return myInitialFire;
+    public Point getMyInitialFire() {
+		int index = myInitialFire.indexOf(',');
+		
+		int x = Integer.parseInt(myInitialFire.substring(0, index));
+		int y = Integer.parseInt(myInitialFire.substring(index + 2));
+		Point startCell = new Point(x, y);
+		
+        return startCell;
     }
 
-
+    @Override
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
