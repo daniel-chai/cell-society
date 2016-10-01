@@ -9,13 +9,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	public static final String TITLE = "CellSociety";
 	public static final int SIZE = 700;
-		
+	
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(TITLE);
-	    	
-	    SceneManager sceneManager = new SceneManager(primaryStage);
-	    sceneManager.goToMenuScene(sceneManager);
+	    new SceneManager(primaryStage);
 	}
 	    
 	public static void main(String[] args) {

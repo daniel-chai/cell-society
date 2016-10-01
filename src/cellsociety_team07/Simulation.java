@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,11 +20,12 @@ import javafx.util.Duration;
  */
 public abstract class Simulation {
     public static final int MILLISECOND_DELAY = 500;
-	
-	protected SceneManager sceneManager;
+    
 	protected Scene simulationScene;
 	protected Group root;
 	protected Timeline animation;
+	
+	protected EventHandler<ActionEvent> goToMenu;
 	
 	protected Grid grid;
 	protected int rows;
@@ -32,8 +35,10 @@ public abstract class Simulation {
 	protected Map<State, Color> colorMap;
 	protected State[][] nextState;
 	
-	protected Simulation(SceneManager sceneManager) {
-		this.sceneManager = sceneManager;
+	protected Simulation(EventHandler<ActionEvent> goToMenu, int rows, int columns) {
+		this.goToMenu = goToMenu;
+		this.rows = rows;
+		this.columns = columns;
 	}
 	
 	public Scene init() {
@@ -55,7 +60,7 @@ public abstract class Simulation {
 	
 	protected void addMenuButton() {
 		Button menuButton = UIGenerator.createButton("Back to Menu", 20, 20, 150, 20, 15);
-		menuButton.setOnAction(e -> sceneManager.goToMenuScene(sceneManager));
+		menuButton.setOnAction(goToMenu);
 		root.getChildren().add(menuButton);
 	}
 	

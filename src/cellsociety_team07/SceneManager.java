@@ -2,6 +2,8 @@ package cellsociety_team07;
 
 import java.awt.Point;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import xml.FireData;
@@ -11,12 +13,7 @@ import xml.SegregationData;
 /**
  * This class handles all the scene changes. In the whole application, there is only one Stage that is 
  * used. That is why this class takes in the primaryStage as a parameter in the constructor. All the 
- * scene changes are done on this Stage. Because this Stage is a saved state across the application, 
- * the same SceneManager object has to be used throughout the application. The implication is that 
- * every public method this class provides takes in a SceneManager object as a parameter. Each of these 
- * public methods goes to a separate Scene. So from the Scene classes, to instigate a scene switch, any 
- * one of the provided public methods can be called with the current SceneManager object passed in as 
- * a parameter.
+ * scene changes are done on this Stage. 
  */
 public class SceneManager {
 	private static final String SEGREGATION = "Schelling's Model Of Segregation";
@@ -26,46 +23,81 @@ public class SceneManager {
 	
 	private Stage stage;
 	
+	private EventHandler<ActionEvent> goToMenu; 
+	private EventHandler<ActionEvent> goToSegregation;
+	private EventHandler<ActionEvent> goToPredatorPrey;
+	private EventHandler<ActionEvent> goToFire;
+	private EventHandler<ActionEvent> goToGameOfLife;
+	
 	/**
 	 * Constructor for SceneManager class
 	 * @param primaryStage the Stage that this SceneManager uses
 	 */
 	public SceneManager(Stage primaryStage) {
 		this.stage = primaryStage;
+		
+		initEventHandlers();
+		
+		goToMenuScene();
 		stage.show();
 	}
 	
-	/**
-	 * Sets the scene to be the Menu Scene
-	 * @param sceneManager SceneManager currently being used
-	 */
-	public void goToMenuScene(SceneManager sceneManager) {
-		Menu menu = new Menu(sceneManager);
+	private void initEventHandlers() {
+		goToMenu = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	goToMenuScene();
+            }
+		};
+		
+		goToSegregation = new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent event) {
+				goToSegregationScene();
+			}
+		};
+		
+		goToPredatorPrey = new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent event) {
+				goToPredatorPreyScene();
+			}
+		};
+		
+		goToFire = new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent event) {
+				goToFireScene();
+			}
+		};
+		
+		goToGameOfLife = new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent event) {
+				goToGameOfLifeScene();
+			}
+		};
+	}
+	
+	private void goToMenuScene() {
+		Menu menu = new Menu(goToSegregation, goToPredatorPrey, goToFire, goToGameOfLife);
 		Scene menuScene = menu.init();
 		stage.setScene(menuScene);
 	}
 	
-	/**
-	 * Sets the scene to be the Segregation simulation Scene
-	 * @param sceneManager SceneManager currently being used
-	 */
-	public void goToSegregationScene(SceneManager sceneManager) {
+	private void goToSegregationScene() {
 		SegregationData data = (SegregationData) DataInput.getInputData(SEGREGATION);
 		
 		int rows = data.getMyNumRows();
 		int cols = data.getMyNumCols();
 		double threshold = data.getMyThreshold();
 		
-		SegregationSimulation simulation = new SegregationSimulation(sceneManager, rows, cols, threshold);
+		SegregationSimulation simulation = new SegregationSimulation(goToMenu, rows, cols, threshold);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
 	
-	/**
-	 * Sets the scene to be the Predator-Prey simulation Scene
-	 * @param sceneManager SceneManager currently being used
-	 */
-	public void goToPredatorPreyScene(SceneManager sceneManager) {
+	private void goToPredatorPreyScene() {
 		PredData data = (PredData) DataInput.getInputData(PREDATOR_PREY);
 		
 		int rows = data.getMyNumRows();
@@ -73,16 +105,12 @@ public class SceneManager {
 		int fishTurnsToBreed = data.getMyFishBreed();
 		int sharkTurnsToBreed = data.getMySharkBreed();
 		
-		PredatorPreySimulation simulation = new PredatorPreySimulation(sceneManager, rows, cols, fishTurnsToBreed, sharkTurnsToBreed);
+		PredatorPreySimulation simulation = new PredatorPreySimulation(goToMenu, rows, cols, fishTurnsToBreed, sharkTurnsToBreed);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
 
-	/**
-	 * Sets the scene to be the Fire simulation Scene
-	 * @param sceneManager SceneManager currently being used
-	 */
-	public void goToFireScene(SceneManager sceneManager) {
+	private void goToFireScene() {
 		FireData data = (FireData) DataInput.getInputData(FIRE);
 		
 		int rows = data.getMyNumRows();
@@ -90,22 +118,18 @@ public class SceneManager {
 		double probCatch = data.getMyProbCatch();
 		Point startCell = data.getMyInitialFire();
 		
-		FireSimulation simulation = new FireSimulation(sceneManager, rows, cols, probCatch, startCell);
+		FireSimulation simulation = new FireSimulation(goToMenu, rows, cols, probCatch, startCell);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
 	
-	/**
-	 * Sets the scene to be the Game-of-Life simulation Scene
-	 * @param sceneManager SceneManager currently being used
-	 */
-	public void goToGameOfLifeScene(SceneManager sceneManager) {
+	private void goToGameOfLifeScene() {
 		LifeData data = (LifeData) DataInput.getInputData(GAME_OF_LIFE);
 		
 		int rows = data.getMyNumRows();
 		int cols = data.getMyNumCols();
 		
-		GameOfLifeSimulation simulation = new GameOfLifeSimulation(sceneManager, rows, cols);
+		GameOfLifeSimulation simulation = new GameOfLifeSimulation(goToMenu, rows, cols);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
