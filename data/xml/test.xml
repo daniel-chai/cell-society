@@ -3,5 +3,5 @@
 	<author>Angela Shiflet</author>
 	<numRows>e</numRows>
 	<numCols>f</numCols>
-	<probCatch>1.3</probCatch>
+	<probCatch>0.5</probCatch>
 	<initialFire>5, 5</initialFire></Data>

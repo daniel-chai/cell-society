@@ -74,7 +74,7 @@ public class DataXMLFactory extends XMLFactory {
         return new LifeData(title, author, numRows, numCols);
     }
 
-    public SegregationData getSegregationData (Element root) throws XMLFactoryException{
+    private SegregationData getSegregationData (Element root) throws XMLFactoryException{
         String title = getTextValue(root, "title");
         String author = getTextValue(root, "author");
         String numRows = getTextValue(root, "numRows");
@@ -100,17 +100,19 @@ public class DataXMLFactory extends XMLFactory {
         }
     }
     
-    private void checkForErrors (Element root) {
+    private void checkForErrors (Element root){
         
         try{
         Integer.parseInt(getTextValue(root, "numRows"));
-        }catch (NumberFormatException e){ 
+        }catch (NumberFormatException e){
+            System.out.println(e.toString());
             System.out.println("Invalid entry in numRows: " + getTextValue(root, "numRows"));
         }
         
         try{
             Integer.parseInt(getTextValue(root, "numCols"));
         }catch (NumberFormatException e){ 
+            System.out.println(e.toString());
             System.out.println("Invalid entry in numCols: " + getTextValue(root, "numCols"));
         }
         
@@ -118,9 +120,8 @@ public class DataXMLFactory extends XMLFactory {
             if(Double.parseDouble(getTextValue(root, "probCatch")) > 1 ||
                     Double.parseDouble(getTextValue(root, "probCatch")) < 0 ){
                 System.out.println("Invalid entry in probCatch: " + getTextValue(root, "probCatch"));
+                throw new XMLParserException(null);
             }
         }
     }
-    
-    
 }
