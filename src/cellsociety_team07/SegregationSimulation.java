@@ -20,11 +20,11 @@ public class SegregationSimulation extends Simulation {
 	
 	private double threshold;
 	
-	public SegregationSimulation(SceneManager sceneManager, String rows, String columns, String threshold) {
+	public SegregationSimulation(SceneManager sceneManager, int rows, int columns, double threshold) {
 		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
-		this.threshold = Double.parseDouble(threshold);
+		this.rows = rows;
+		this.columns = columns;
+		this.threshold = threshold;
 	}
 	
 	@Override

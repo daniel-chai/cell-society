@@ -16,10 +16,10 @@ public class GameOfLifeSimulation extends Simulation {
 	private static final String stateAlive = "ALIVE";
 	private static final String stateDead = "DEAD";
 	
-	public GameOfLifeSimulation(SceneManager sceneManager, String rows, String columns) {
+	public GameOfLifeSimulation(SceneManager sceneManager, int rows, int columns) {
 		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
+		this.rows = rows;
+		this.columns = columns;
 	}
 
 	@Override

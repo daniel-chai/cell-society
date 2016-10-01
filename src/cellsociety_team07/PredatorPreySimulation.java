@@ -24,12 +24,12 @@ public class PredatorPreySimulation extends Simulation {
 	private int turnsSinceLastFishBreed = 0;
 	private int turnsSinceLastSharkBreed = 0;
 	
-	public PredatorPreySimulation(SceneManager sceneManager, String rows, String columns, String fishTurnsToBreed, String sharkTurnsToBreed) {
+	public PredatorPreySimulation(SceneManager sceneManager, int rows, int columns, int fishTurnsToBreed, int sharkTurnsToBreed) {
 		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
-		this.fishTurnsToBreed = Integer.parseInt(fishTurnsToBreed);
-		this.sharkTurnsToBreed = Integer.parseInt(sharkTurnsToBreed);
+		this.rows = rows;
+		this.columns = columns;
+		this.fishTurnsToBreed = fishTurnsToBreed;
+		this.sharkTurnsToBreed = sharkTurnsToBreed;
 	}
 	
 	@Override

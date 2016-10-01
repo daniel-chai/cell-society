@@ -1,5 +1,6 @@
 package cellsociety_team07;
 
+import java.awt.Point;
 import java.io.File;
 
 import javafx.scene.Scene;
@@ -55,8 +56,11 @@ public class SceneManager {
 	public void goToSegregationScene(SceneManager sceneManager) {
 		SegregationData data = (SegregationData) getInputData("Schelling's Model Of Segregation");
 		
-		SegregationSimulation simulation = new SegregationSimulation(sceneManager, 
-				data.getMyNumRows(), data.getMyNumCols(), data.getMyThreshold());
+		int rows = Integer.parseInt(data.getMyNumRows());
+		int cols = Integer.parseInt(data.getMyNumCols());
+		double threshold = Double.parseDouble(data.getMyThreshold());
+		
+		SegregationSimulation simulation = new SegregationSimulation(sceneManager, rows, cols, threshold);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
@@ -68,8 +72,12 @@ public class SceneManager {
 	public void goToPredatorPreyScene(SceneManager sceneManager) {
 		PredData data = (PredData) getInputData("Predator-Prey");
 		
-		PredatorPreySimulation simulation = new PredatorPreySimulation(sceneManager,
-				data.getMyNumRows(), data.getMyNumCols(), data.getMyFishBreed(), data.getMySharkBreed());
+		int rows = Integer.parseInt(data.getMyNumRows());
+		int cols = Integer.parseInt(data.getMyNumCols());
+		int fishTurnsToBreed = Integer.parseInt(data.getMyFishBreed());
+		int sharkTurnsToBreed = Integer.parseInt(data.getMySharkBreed());
+		
+		PredatorPreySimulation simulation = new PredatorPreySimulation(sceneManager, rows, cols, fishTurnsToBreed, sharkTurnsToBreed);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
@@ -81,8 +89,15 @@ public class SceneManager {
 	public void goToFireScene(SceneManager sceneManager) {
 		FireData data = (FireData) getInputData("Spreading Of Fire");
 		
-		FireSimulation simulation = new FireSimulation(sceneManager, 
-				data.getMyNumRows(), data.getMyNumCols(), data.getMyProbCatch(), data.getMyInitialFire());
+		int rows = Integer.parseInt(data.getMyNumRows());
+		int cols = Integer.parseInt(data.getMyNumCols());
+		double probCatch = Double.parseDouble(data.getMyProbCatch());
+		
+		String startCellString = data.getMyInitialFire();
+		int index = startCellString.indexOf(',');
+		Point startCell = new Point(Integer.parseInt(startCellString.substring(0, index)), Integer.parseInt(startCellString.substring(index + 2)));
+		
+		FireSimulation simulation = new FireSimulation(sceneManager, rows, cols, probCatch, startCell);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}
@@ -94,8 +109,10 @@ public class SceneManager {
 	public void goToGameOfLifeScene(SceneManager sceneManager) {
 		LifeData data = (LifeData) getInputData("Conway's Game of Life");
 		
-		GameOfLifeSimulation simulation = new GameOfLifeSimulation(sceneManager,
-				data.getMyNumRows(), data.getMyNumCols());
+		int rows = Integer.parseInt(data.getMyNumRows());
+		int cols = Integer.parseInt(data.getMyNumCols());
+		
+		GameOfLifeSimulation simulation = new GameOfLifeSimulation(sceneManager, rows, cols);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}

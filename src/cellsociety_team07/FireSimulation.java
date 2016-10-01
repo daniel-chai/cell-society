@@ -20,14 +20,12 @@ public class FireSimulation extends Simulation {
 	private double probCatch;
 	private Point startCell;
 	
-	public FireSimulation(SceneManager sceneManager, String rows, String columns, String probCatch, String startCell) {
+	public FireSimulation(SceneManager sceneManager, int rows, int columns, double probCatch, Point startCell) {
 		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
-		this.probCatch = Double.parseDouble(probCatch);
-		
-		int index = startCell.indexOf(',');
-		this.startCell = new Point(Integer.parseInt(startCell.substring(0, index)), Integer.parseInt(startCell.substring(index + 2)));
+		this.rows = rows;
+		this.columns = columns;
+		this.probCatch = probCatch;
+		this.startCell = startCell;
 	}
 	
 	@Override
