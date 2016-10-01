@@ -13,13 +13,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import ui_components.ButtonBuilder;
+
 /**
  * This class is the abstract superclass for all the different types of simulations. It is meant
  * to be extended. Each particular simulation has different rules, so each particular simulation
  * will extend this Simulation superclass and implement its own rules.
  */
 public abstract class Simulation {
-    public static final int MILLISECOND_DELAY = 500;
+    private static final int MILLISECOND_DELAY = 500;
     
 	protected Scene simulationScene;
 	protected Group root;
@@ -59,19 +61,40 @@ public abstract class Simulation {
 	protected abstract void initColors();
 	
 	protected void addMenuButton() {
-		Button menuButton = UIGenerator.createButton("Back to Menu", 20, 20, 150, 20, 15);
+		Button menuButton = new ButtonBuilder().setText("Back To Menu")
+								.setXLocation(20)
+								.setYLocation(20)
+								.setWidth(150)
+								.setHeight(20)
+								.setFontSize(15)
+								.build();
+		
 		menuButton.setOnAction(goToMenu);
 		root.getChildren().add(menuButton);
 	}
 	
 	protected void addStepButton() {
-		Button stepButton = UIGenerator.createButton("Show Next Step", 200, 20, 150, 20, 15);
+		Button stepButton = new ButtonBuilder().setText("Show Next Step")
+								.setXLocation(220)
+								.setYLocation(20)
+								.setWidth(150)
+								.setHeight(20)
+								.setFontSize(15)
+								.build();
+		
 		stepButton.setOnAction(e -> updateGrid());
 		root.getChildren().add(stepButton);
 	}
 	
 	protected void addPlayButton() {
-		Button playButton = UIGenerator.createButton("Play", 380, 20, 100, 20, 15);
+		Button playButton = new ButtonBuilder().setText("Play")
+								.setXLocation(400)
+								.setYLocation(20)
+								.setWidth(100)
+								.setHeight(20)
+								.setFontSize(15)
+								.build();
+		
 		playButton.setOnAction(e -> activatePlay());
 		root.getChildren().add(playButton);
 	}
@@ -86,7 +109,14 @@ public abstract class Simulation {
 	}
 	
 	protected void addStopButton() {
-		Button stopButton = UIGenerator.createButton("Stop", 500, 20, 100, 20, 15);
+		Button stopButton = new ButtonBuilder().setText("Stop")
+								.setXLocation(510)
+								.setYLocation(20)
+								.setWidth(100)
+								.setHeight(20)
+								.setFontSize(15)
+								.build();
+		
 		stopButton.setOnAction(e -> activateStop());
 		root.getChildren().add(stopButton);
 	}
