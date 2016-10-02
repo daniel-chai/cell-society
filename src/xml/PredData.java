@@ -2,11 +2,6 @@ package xml;
 
 public class PredData extends Data{
 
-    private String myDataType;
-    private String myTitle;
-    private String myAuthor;
-    private String myNumRows;
-    private String myNumCols;
     private String myFishBreed;
     private String mySharkBreed;
     private String myFishStarve;
@@ -21,62 +16,49 @@ public class PredData extends Data{
                  String fishStarve,
                  String sharkStarve){
         
-        myTitle = title;
-        myAuthor = author;
-        myNumRows = numRows;
-        myNumCols = numCols;
+        super.setMyTitle(title);
+        super.setMyAuthor(author);
+        super.setMyNumRows(numRows);
+        super.setMyNumCols(numCols);
         myFishBreed = fishBreed;
         mySharkBreed = sharkBreed;
         myFishStarve = fishStarve;
         mySharkStarve = sharkStarve;
         
     }
-    
 
-    public String getMyDataType () {
-        return myDataType;
+    public int getMyNumRows () {
+        return Integer.parseInt(myNumRows);
     }
 
-    public String getMyTitle () {
-        return myTitle;
+    public int getMyNumCols () {
+        return Integer.parseInt(myNumCols);
     }
 
-    public String getMyAuthor () {
-        return myAuthor;
+    public int getMyFishBreed () {
+        return Integer.parseInt(myFishBreed);
     }
 
-    public String getMyNumRows () {
-        return myNumRows;
-    }
-
-    public String getMyNumCols () {
-        return myNumCols;
-    }
-
-
-    public String getMyFishBreed () {
-        return myFishBreed;
-    }
-
-    public String getMySharkBreed () {
-        return mySharkBreed;
+    public int getMySharkBreed () {
+        return Integer.parseInt(mySharkBreed);
     }
     
-    public String getMyFishStarve () {
-        return myFishStarve;
+    public int getMyFishStarve () {
+        return Integer.parseInt(myFishStarve);
     }
 
-    public String getMySharkStarve () {
-        return mySharkStarve;
+    public int getMySharkStarve () {
+        return Integer.parseInt(mySharkStarve);
     }
 
+    @Override
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
-              .append("title='").append(getMyTitle()).append("', ")
-              .append("author='").append((getMyAuthor())).append("', ")
-              .append("numRows='").append((getMyNumRows())).append("', ")
-              .append("numCols='").append((getMyNumCols())).append("', ")
+              .append("title='").append(super.getMyTitle()).append("', ")
+              .append("author='").append((super.getMyAuthor())).append("', ")
+              .append("numRows='").append(myNumRows).append("', ")
+              .append("numCols='").append(myNumCols).append("', ")
               .append("fishBreed='").append((getMyFishBreed())).append("', ")
               .append("fishStarve='").append((getMyFishStarve())).append("', ")
               .append("sharkBreed='").append((getMySharkBreed())).append("', ")

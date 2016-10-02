@@ -7,16 +7,41 @@ public abstract class Data {
     private String myDataType;
     private String myTitle;
     private String myAuthor;
-    private String myNumRows;
-    private String myNumCols;
-    private String myThreshold;
+    protected String myNumRows;
+    protected String myNumCols;
     
-    public abstract String getMyDataType();
+    public String getMyDataType(){
+        return myDataType;
+    }
 
-    public abstract String getMyTitle();
+    public String getMyTitle(){
+        return myTitle;
+    }
 
-    public abstract String getMyAuthor();
+    public String getMyAuthor(){
+        return myAuthor;
+    }
     
+    public void setMyDataType (String myDataType) {
+        this.myDataType = myDataType;
+    }
+
+    public void setMyTitle (String myTitle) {
+        this.myTitle = myTitle;
+    }
+
+    public void setMyAuthor (String myAuthor) {
+        this.myAuthor = myAuthor;
+    }
+
+    public void setMyNumRows (String myNumRows) {
+        this.myNumRows = myNumRows;
+    }
+
+    public void setMyNumCols (String myNumCols) {
+        this.myNumCols = myNumCols;
+    }
+
     public abstract String toString();
 }
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><Data dataType="fire">
+	<title>Spreading Of Fire</title>
+	<author>Angela Shiflet</author>
+	<numRows>e</numRows>
+	<numCols>f</numCols>
+	<probCatch>0.5</probCatch>
+	<initialFire>5, 5</initialFire></Data>

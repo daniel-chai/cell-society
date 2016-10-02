@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Collection;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import structure.GridView;
 import structure.Structure;
@@ -18,6 +18,8 @@ import structure.HexagonGridView;
 
 /**
  * This class implements the Fire simulation.
+ * 
+ * @author Daniel Chai
  */
 public class FireSimulation extends Simulation {
 	private static final State stateEmpty = new State("EMPTY");
@@ -27,14 +29,10 @@ public class FireSimulation extends Simulation {
 	private double probCatch;
 	private Point startCell;
 	
-	public FireSimulation(SceneManager sceneManager, String rows, String columns, String probCatch, String startCell) {
-		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
-		this.probCatch = Double.parseDouble(probCatch);
-		
-		int index = startCell.indexOf(',');
-		this.startCell = new Point(Integer.parseInt(startCell.substring(0, index)), Integer.parseInt(startCell.substring(index + 2)));
+	public FireSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns, double probCatch, Point startCell) {
+		super(goToMenu, rows, columns);
+		this.probCatch = probCatch;
+		this.startCell = startCell;
 	}
 	
 	@Override

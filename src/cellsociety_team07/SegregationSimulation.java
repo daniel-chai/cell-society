@@ -10,6 +10,8 @@ import java.util.Collection;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.Node;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import structure.GridView;
 import structure.HexagonGridView;
@@ -18,6 +20,8 @@ import structure.StructureView;
 
 /**
  * This class implements the Segregation simulation.
+ * 
+ * @author Daniel Chai
  */
 public class SegregationSimulation extends Simulation {
 	private static final State stateX = new State("X");
@@ -26,28 +30,10 @@ public class SegregationSimulation extends Simulation {
 	
 	private double threshold;
 	private StructureView boardView;
-	
-	public SegregationSimulation(SceneManager sceneManager, String rows, String columns, String threshold) {
-		super(sceneManager);
-	}
 
-	public Scene init() {
-//		root = new Group();
-//		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
-//		
-//		addMenuButton();
-//		addStepButton();
-//		
-//		rows = 10;			// hard-coded for now
-//		columns = 10;		// hard-coded for now
-//		initGrid();
-//		threshold = 0.3;
-//		
-		threshold = 0.3;
-		rows = 10;
-		columns = 10;
-		
-		return super.init();
+	public SegregationSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns, double threshold) {
+		super(goToMenu, rows, columns);
+		this.threshold = threshold;
 	}
 	
 	@Override

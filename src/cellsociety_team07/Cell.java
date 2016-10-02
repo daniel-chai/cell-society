@@ -1,6 +1,8 @@
 package cellsociety_team07;
 /**
  * This class represents a single Cell in a grid.
+ * 
+ * @author Daniel Chai
  */
 
 public class Cell {

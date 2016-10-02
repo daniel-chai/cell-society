@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import structure.GridView;
 import structure.HexagonGridView;
@@ -18,15 +18,15 @@ import structure.StructureView;
 
 /**
  * This class implements the Game-of-Life simulation
+ * 
+ * @author Daniel Chai
  */
 public class GameOfLifeSimulation extends Simulation {
 	private static final State stateAlive = new State("ALIVE");
 	private static final State stateDead = new State("DEAD");
 	
-	public GameOfLifeSimulation(SceneManager sceneManager, String rows, String columns) {
-		super(sceneManager);
-		this.rows = Integer.parseInt(rows);
-		this.columns = Integer.parseInt(columns);
+	public GameOfLifeSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns) {
+		super(goToMenu, rows, columns);
 	}
 
 	@Override
