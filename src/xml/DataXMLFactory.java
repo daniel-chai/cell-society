@@ -17,7 +17,8 @@ public class DataXMLFactory extends XMLFactory {
     public Data getData (Element root) throws XMLFactoryException{
         if (! isValidFile(root)) {
             throw new XMLFactoryException("XML file does not represent valid data");
-            }
+        }
+                
         String dataType = getAttribute(root, "dataType");
         
         if(dataType.equals("segregation")){
@@ -32,9 +33,14 @@ public class DataXMLFactory extends XMLFactory {
         else if(dataType.equals("predatorprey")){
             return getPredData(root);
         }
+        else{
+            checkDataType(root);
+        }
+        
+
         return null; 
     }
-    
+
     private PredData getPredData(Element root) throws XMLFactoryException{
         String title = getTextValue(root, "title");
         String author = getTextValue(root, "author");
@@ -44,7 +50,7 @@ public class DataXMLFactory extends XMLFactory {
         String sharkBreed = getTextValue(root, "SharkTurnsToBreed");
         String fishStarve = getTextValue(root, "FishTurnsToStarve");
         String sharkStarve = getTextValue(root, "SharkTurnsToStarve");
-        
+        checkForErrors(root);
         return new PredData(title, author, numRows, numCols, fishBreed, sharkBreed, fishStarve, sharkStarve);
     }
     
@@ -55,8 +61,7 @@ public class DataXMLFactory extends XMLFactory {
         String numCols = getTextValue(root, "numCols");
         String probCatch = getTextValue(root, "probCatch");
         String initialFire = getTextValue(root, "initialFire");
-        
-        
+        checkForErrors(root);
         return new FireData(title, author, numRows, numCols, probCatch, initialFire);
     }
     
@@ -65,22 +70,58 @@ public class DataXMLFactory extends XMLFactory {
         String author = getTextValue(root, "author");
         String numRows = getTextValue(root, "numRows");
         String numCols = getTextValue(root, "numCols");
-        
+        checkForErrors(root);
         return new LifeData(title, author, numRows, numCols);
     }
 
-    public SegregationData getSegregationData (Element root) throws XMLFactoryException{
+    private SegregationData getSegregationData (Element root) throws XMLFactoryException{
         String title = getTextValue(root, "title");
         String author = getTextValue(root, "author");
         String numRows = getTextValue(root, "numRows");
         String numCols = getTextValue(root, "numCols");
         String threshold = getTextValue(root, "threshold");
-        
+        checkForErrors(root);
         return new SegregationData(title, author, numRows, numCols, threshold);
     }
 
     @Override
     protected boolean isValidFile (Element root) {
-        return true;
+        return root.hasAttribute("dataType");
+    }
+    
+    
+    private void checkDataType(Element root){
+        
+        if(root.getAttribute("dataType").equals("")){
+            System.out.println("No datatype given in file.");
+        }
+        else{
+            System.out.println("Data type not supported.");
+        }
+    }
+    
+    private void checkForErrors (Element root){
+        
+        try{
+        Integer.parseInt(getTextValue(root, "numRows"));
+        }catch (NumberFormatException e){
+            System.out.println(e.toString());
+            System.out.println("Invalid entry in numRows: " + getTextValue(root, "numRows"));
+        }
+        
+        try{
+            Integer.parseInt(getTextValue(root, "numCols"));
+        }catch (NumberFormatException e){ 
+            System.out.println(e.toString());
+            System.out.println("Invalid entry in numCols: " + getTextValue(root, "numCols"));
+        }
+        
+        if(root.getAttribute("dataType").equals("fire")){
+            if(Double.parseDouble(getTextValue(root, "probCatch")) > 1 ||
+                    Double.parseDouble(getTextValue(root, "probCatch")) < 0 ){
+                System.out.println("Invalid entry in probCatch: " + getTextValue(root, "probCatch"));
+                throw new XMLParserException(null);
+            }
+        }
     }
 }

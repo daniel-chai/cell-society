@@ -3,11 +3,7 @@ package xml;
 import java.awt.Point;
 
 public class FireData extends Data{
-    private String myDataType;
-    private String myTitle;
-    private String myAuthor;
-    private String myNumRows;
-    private String myNumCols;
+
     private String myProbCatch;
     private String myInitialFire;
     
@@ -18,27 +14,12 @@ public class FireData extends Data{
                  String probCatch, 
                  String initialFire) {
         
-        myTitle = title;
-        myAuthor = author;
-        myNumRows = numRows;
-        myNumCols = numCols;
+        super.setMyTitle(title);
+        super.setMyAuthor(author);
+        super.setMyNumRows(numRows);
+        super.setMyNumCols(numCols);
         myProbCatch = probCatch;
         myInitialFire = initialFire;
-    }
-    
-    @Override
-    public String getMyDataType () {
-        return myDataType;
-    }
-
-    @Override
-    public String getMyTitle () {
-        return myTitle;
-    }
-    
-    @Override
-    public String getMyAuthor () {
-        return myAuthor;
     }
 
     public int getMyNumRows () {
@@ -67,10 +48,10 @@ public class FireData extends Data{
     public String toString () {
         StringBuilder result = new StringBuilder();
         result.append("Data{")
-              .append("title='").append(getMyTitle()).append("', ")
-              .append("author='").append((getMyAuthor())).append("', ")
-              .append("numRows='").append((getMyNumRows())).append("', ")
-              .append("numCols='").append((getMyNumCols())).append("', ")
+              .append("title='").append(super.getMyTitle()).append("', ")
+              .append("author='").append((super.getMyAuthor())).append("', ")
+              .append("numRows='").append(myNumRows).append("', ")
+              .append("numCols='").append(myNumCols).append("', ")
               .append("probCatch='").append(getMyProbCatch()).append("', ")
               .append("initialFire='").append(getMyInitialFire()).append("'")
               .append('}');
