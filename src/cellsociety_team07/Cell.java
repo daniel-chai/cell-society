@@ -2,12 +2,14 @@ package cellsociety_team07;
 /**
  * This class represents a single Cell in a grid.
  */
-public class Cell{
 
+public class Cell {
 	public static final Cell OUT_OF_BOUNDS = new Cell(State.OUT_OF_BOUNDS);
-	private CellView view;
+	public static final double CELL_SIZE = 50;
+
 	private State state;
 	private Neighborhood neighborhood;
+	
 	
 	/**
 	 * Constructor for Cell class.
@@ -15,19 +17,19 @@ public class Cell{
 	 */
 	public Cell(State state) {
 		this.state = state;
-		
-		this.view = new CellView();
-		
 		this.neighborhood = new Neighborhood();
 	}
 	
-	/**
-	 * @return the View representing the Cell
-	 */
-	public CellView getView() {
-		return view;
-	}
 	
+	/**
+	 * This is a frequent test used by other classes,
+	 * @param cell- the Cell being tested
+	 * @return true if the Cell is not null or OUT_OF_BOUNDS
+	 */
+	public boolean isValid()
+	{
+		return !this.equals(Cell.OUT_OF_BOUNDS);
+	}
 	
 	/**
 	 * @return the current State of the Cell
@@ -53,6 +55,20 @@ public class Cell{
 		if(!this.state.equals(State.OUT_OF_BOUNDS))
 		{
 			this.state = state;
+		}
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Cell)) {
+			return false;
+		}
+		else {
+			Cell other = (Cell) obj;
+			return this.state.equals(other.state);
 		}
 	}
 }

@@ -1,62 +1,66 @@
 package structure;
 
 import cellsociety_team07.Cell;
-import java.awt.Point;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
+import java.util.Collection;
+import java.awt.Point;
+import java.util.Map;
+import java.util.HashMap;
 import javafx.scene.Node;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.Collections;
 
 /**
  * This class represents the structure the Cellular Automata is ran on
  * StructureIterator class based on code from: http://codereview.stackexchange.com/questions/48109/simple-example-of-an-iterable-and-an-iterator-in-java
  */
-public class Structure implements Iterable<Cell>
+public abstract class Structure implements Iterable<Cell>
 {
-	private Cell[][] board;
-	private StructureView view;
+	//private Cell[][] board;
+	private Map<Point,Cell> board;
+	private int numCols;
+	private int numRows;
+	private boolean isBounded;
 	
 	/**
 	 * Convenience constructor that creates a width*height board with no bounds
-	 * @param width
-	 * @param height
+	 * @param numCols
+	 * @param numRows
 	 */
-	public Structure(int width,int height)
+	public Structure(int numRows,int numCols)
 	{
-		this(width,height,new ArrayList<Point>());
-		view = new StructureView(board);
+		this(numRows,numCols,new ArrayList<Point>());
 	}
 	
 	/**
 	 * This is the default constructor
-	 * @param width - The width of the board
-	 * @param height - The height of the board
+	 * @param numCols - The width of the board
+	 * @param numRows - The height of the board
 	 * @param outOfBounds - Locations that cells
 	 */
-	public Structure(int width, int height, Collection<Point> outOfBounds)
+	public Structure(int numRows, int numCols, Collection<Point> outOfBounds)
 	{
-		board = new Cell[width][height];
+		this.board = new HashMap<Point,Cell>();
+		this.numCols = numCols;
+		this.numRows = numRows;
+		
 		defineOutOfBounds(outOfBounds);
-	}
-	// I DON'T THINK THIS CODE BELONGS HERE-----------------START----
-	public Node generateView(int width,int height)
-	{
-		view.setSizeOfView(width, height);
-		return view.getNode();
+		fillNotOutOfBoundsWithNulls();
 	}
 	
-	// I DON't THINK THIS CODE BELONGS HERE------------------END-----
 	/**
 	 * Places a Cell at point p if that cell is in bounds
 	 * @param cell the Cell that is being placed
 	 * @param p the location the Cell is being placed
 	 */
-	public void addCell(Cell cell, Point p)
+	public void addCell(Cell cell, Point point)
 	{
-		if(getCellFromPoint(p) != Cell.OUT_OF_BOUNDS)
+		Cell currentCellAtPoint = getCell(point);
+		if(currentCellAtPoint == null || !currentCellAtPoint.equals(Cell.OUT_OF_BOUNDS))
 		{
-			board[p.x][p.y] = cell;
+			board.put(point, cell);
 		}
 	}
 	
@@ -66,9 +70,9 @@ public class Structure implements Iterable<Cell>
 	 * @param i - the x coordinate (typically the height in a board)
 	 * @param j = the y coordinate (typically the width in a board)
 	 */
-	public void addCell(Cell cell, int i, int j)
+	public void addCell(Cell cell, int row, int col)
 	{
-		addCell(cell,new Point(i,j));
+		addCell(cell,new Point(row,col));
 	}
 	
 	/**
@@ -77,7 +81,7 @@ public class Structure implements Iterable<Cell>
 	 */
 	public int getWidth()
 	{
-		return board[0].length;
+		return numCols;
 	}
 	
 	/**
@@ -86,7 +90,7 @@ public class Structure implements Iterable<Cell>
 	 */
 	public int getHeight()
 	{
-		return board.length;
+		return numRows;
 	}
 	
 	@Override
@@ -103,9 +107,9 @@ public class Structure implements Iterable<Cell>
 	 * @param i
 	 * @param j
 	 */
-	public Cell getCell(int i, int j)
+	public Cell getCell(int row, int col)
 	{
-		return getCellFromPoint(new Point(i,j));
+		return getCell(new Point(row,col));
 	}
 	
 	/**
@@ -113,44 +117,172 @@ public class Structure implements Iterable<Cell>
 	 * @param p point the Cell is located at
 	 * @return the Cell at point p
 	 */
-	public Cell getCellFromPoint(Point p)
+	public Cell getCell(Point p)
 	{
-		return board[p.x][p.y];
+		return board.get(p);
 	}
 	
+	/**
+	 * This method will return Out of Bounds and Valid points
+	 * @return an immutable list of the Points on the board
+	 */
+	public Set<Point> getAllPoints()
+	{
+		return Collections.unmodifiableSet(board.keySet());
+	}
+	
+	/**
+	 * This method only returns valid points on the board
+	 * @return collection of valid points on the board
+	 */
+	public Collection<Point> getPointsOnBoard()
+	{
+		ArrayList<Point> pointsOnBoard = new ArrayList<Point>();
+		
+		for(Point point : getAllPoints())
+		{
+			Cell cellAtPoint = getCell(point);
+			if(cellAtPoint == null || !cellAtPoint.equals(Cell.OUT_OF_BOUNDS))
+			{
+				pointsOnBoard.add(point);
+			}
+		}
+		
+		return pointsOnBoard;
+	}
+	
+	/**
+	 * Defines the neighborhood of the cells in the grid based on how the
+	 * simulation defines the neighbors collection. The calculateNeighbors
+	 * method ensures that the neighbors that are passed in does not contain
+	 * (0,0).
+	 * @param neighbors: Collection of points that are defined as relative
+	 * to (0,0), the location of the cell. For example, if you wanted to 
+	 * define the neighborhoods of the Cells in the Structure to be immediately
+	 * next to the Cell, you would pass a Collection of Points containing:
+	 * (-1,0),(-1,1),(0,1),(1,1),(1,1),(1,-1),(0,-1),(-1,-1)
+	 */
+	public void calculateNeighborsForCells(Collection<Point> neighbors)
+	{
+		if(neighbors.contains(new Point(0,0)))
+		{
+			neighbors.remove(new Point(0,0));
+		}
+		
+		for(Point cellPoint : getPointsOnBoard())
+		{
+			Cell currentCell = getCell(cellPoint);
+			
+			if(currentCell != null && currentCell.isValid())
+			{
+				for(Point relativePoint : neighbors)
+				{
+					Point actualPoint = new Point(cellPoint.x+relativePoint.x,cellPoint.y+relativePoint.y);
+					if(isValidCellAt(actualPoint))
+					{
+						currentCell.getNeighborhood().addNeighbor(getCell(actualPoint));
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 * @return true if the cell is in the board, that cell is not null, p is not out of bounds
+	 */
+	private boolean isValidCellAt(Point p)
+	{
+		if(isBounded && p.x >= numCols && p.y >= numRows)
+		{
+			return false;
+		}
+		
+		if(board.containsKey(p))
+		{
+			Cell cell = getCell(p);
+			return cell != null && cell.isValid();
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * @param cell the Cell
+	 * @return location of the specified Cell in the grid
+	 */
+	public Point getLocation(Cell cell) {
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numCols; col++) {
+				if (board.get(new Point(row,col))== cell) {
+					return new Point(row, col);
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+
+	private void fillNotOutOfBoundsWithNulls()
+	{
+		for(int row = 0; row < getHeight(); row++)
+		{
+			for(int col = 0; col < getWidth(); col++)
+			{
+				Point point = new Point(row,col);
+				
+				if(!board.containsKey(point) || !getCell(point).equals(Cell.OUT_OF_BOUNDS))
+				{
+					board.put(point,null);
+				}
+			}
+		}
+	}
+	
+
 	private void defineOutOfBounds(Collection<Point> outOfBounds)
 	{
 		for(Point location : outOfBounds)
 		{
-			board[location.x][location.y] = Cell.OUT_OF_BOUNDS;
+			board.put(location,Cell.OUT_OF_BOUNDS);
 		}
 	}
 	
 	private class StructureIterator implements Iterator<Cell>
 	{
-		private int index; // Begins at 0
-		private Cell[][] board;
-		private final int LAST_INDEX;
+		private ArrayList<Cell> validCells;
 		
-		public StructureIterator(Cell[][] board)
+		/**
+		 * Takes in the board that Structure uses and returns an Iterator that goes through
+		 * all valid cells
+		 * @param board
+		 */
+		public StructureIterator(Map<Point,Cell> board)
 		{
-			this.index = 0;
-			this.board = board;
-			this.LAST_INDEX = board.length * board[0].length - 1;
+			this.validCells = removeOutOfBounds(board.values());
+		}
+		
+		private ArrayList<Cell> removeOutOfBounds(Collection<Cell> values)
+		{
+			ArrayList<Cell> outOfBounds = new ArrayList<Cell>();
+			outOfBounds.add(Cell.OUT_OF_BOUNDS);
+			values.removeAll(outOfBounds);
+			
+			return new ArrayList<Cell>(values);
 		}
 		
 		public boolean hasNext()
 		{
-			return index < LAST_INDEX;
+			return validCells.size() > 0;
 		}
 		
 		public Cell next()
 		{
 			if(this.hasNext())
 			{
-				index++;
-				Point cell = getCoordinate(index);
-				return board[cell.x][cell.y];
+				return validCells.remove(0);
 			}
 			throw new NoSuchElementException();
 		}
@@ -158,11 +290,6 @@ public class Structure implements Iterable<Cell>
 		public void remove()
 		{
 			throw new UnsupportedOperationException();
-		}
-		
-		private Point getCoordinate(int value)
-		{
-			return new Point(value / board.length , value % board.length);
 		}
 	}
 	

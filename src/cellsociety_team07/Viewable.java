@@ -8,4 +8,5 @@ import javafx.scene.Node;
 public interface Viewable 
 {
 	public Node getNode();
+	public void updateView();
 }

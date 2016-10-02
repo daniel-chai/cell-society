@@ -5,55 +5,61 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import java.util.Map;
 
 /**
  * This class contains the corresponding View for the cell
  */
 public class CellView implements Viewable
 {
-	private Shape view;
-	private static final int WIDTH = 10; // Regardless of the Shape, the Width and the Height of the view will be equal
-	
+	private Circle view;
+	private ColorMap colorMap;
+	private Cell cell;
+	private static final int DEFAULT_WIDTH = 10; 
+	private static final int DEFAULT_HEIGHT = DEFAULT_WIDTH;
 	/**
 	 * Creates a new CellView with a Circle Node
 	 */
-	public CellView()
+	public CellView(Cell c, ColorMap m)
 	{
-		view = new Rectangle(WIDTH,WIDTH);
+		this.view = new Circle();
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		this.cell = c;
+		this.colorMap = m;
+		updateView();
 	}
 	
 	/**
-	 * Creates a new CellView with the Color c
-	 * @param c
+	 * Called upon to update the view, checks the Cell for its state and sets it to the 
+	 * correct corresponding color
 	 */
-	public CellView(Color c)
+	public void updateView()
 	{
-		this();
-		setColor(c);
+		setColor(colorMap.getColor(cell.getState()));
 	}
 	
 	/**
-	 * Set the color of the Shape
-	 * @param c the color view is set to
-	 */
-	public void setColor(Color c)
-	{
-		view.setFill(c);
-	}
-	
-	/**
-	 * Method that sets the width of the Node to width
-	 * NOTE: Height will be set to be equivalent to width
+	 * Method that sets the width and height of the Node to width and height
 	 * @param width the width the Node is adjusted to
+	 * @param height the height the Node is adjusted to
 	 */
-	public void setWidth(int width)
+	public void setSize(int width, int height)
 	{
-		((Rectangle)view).setWidth(width);
-		((Rectangle)view).setHeight(width);
+		((Circle)view).setRadius(Math.min(width, height));
+		//((Rectangle)view).setWidth(width);
+		//((Rectangle)view).setHeight(height);
 	}
 	
+	/**
+	 * Returns the javafx Node of the view
+	 */
 	public Node getNode()
 	{
 		return view;
+	}
+	
+	private void setColor(Color c)
+	{
+		view.setFill(c);
 	}
 }

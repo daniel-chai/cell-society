@@ -1,9 +1,12 @@
 package cellsociety_team07;
 import structure.Structure;
 
+import structure.Structure;
+
 /**
- * This class represents a grid of Cells.
+ * This class represents a rectangular grid of Cells.
  */
+
 public class Grid extends Structure
 {
 	/**
@@ -11,7 +14,8 @@ public class Grid extends Structure
 	 * @param rows number of rows in the grid
 	 * @param columns number of columns in the grid
 	 */
-	public Grid(int rows, int columns) {
+	public Grid(int rows, int columns) 
+	{
 		super(rows,columns);
 	}
 }

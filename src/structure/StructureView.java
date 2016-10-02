@@ -3,29 +3,49 @@ package structure;
 import cellsociety_team07.Cell;
 import cellsociety_team07.CellView;
 import cellsociety_team07.Viewable;
+import cellsociety_team07.ColorMap;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
+import java.awt.Point;
+import java.lang.ref.SoftReference;
+import java.util.Collection;
+import java.util.ArrayList;
+import javafx.scene.shape.Circle;;
 
+/**
+ * This class handles the graphical rendering of the Structure class. It has a pointer
+ * to the Structure class because that way if a cell is added, it can be updated in the
+ * View with out directly calling the View to update it.
+ */
 public class StructureView implements Viewable
 {
 	private GridPane grid;
-	private Cell[][] board;
+	private SoftReference<Structure> structure;
+	private ColorMap colorMap;
+	private Collection<CellView> cellViews;
+	
 	private int gridWidth;
 	private int gridHeight;
 	private int cellWidth;
+	private int cellHeight;
 	
 	/**
-	 * Creates a new Structure view of the desired width and height
+	 * Creates a new Structure view of the desired width and height with a 
+	 * SoftReference to its corresponding Structure
 	 * @param width
 	 * @param height
 	 */
-	public StructureView(Cell[][] board, int width, int height)
+	public StructureView(Structure structure, ColorMap cm, int width, int height)
 	{
-		this.board = board;
-		grid = new GridPane();
-		gridWidth = width;
-		gridHeight = height;
-		cellWidth = determineCellWidth();
+		this.structure = new SoftReference<Structure>(structure);
+		this.grid = new GridPane();
+		this.cellViews = new ArrayList<CellView>();
+		
+		this.colorMap = cm;
+		this.gridWidth = width;
+		this.gridHeight = height;
+		this.cellWidth = determineCellWidth();
+		this.cellHeight = determineCellHeight();
 		
 		populateGridPane();
 	}
@@ -34,9 +54,9 @@ public class StructureView implements Viewable
 	 * Convenience initilializer
 	 * @param board
 	 */
-	public StructureView(Cell[][] board)
+	public StructureView(Structure structure, ColorMap cm)
 	{
-		this(board,100,100);
+		this(structure,cm,200,200);
 	}
 	/**
 	 * Returns the GridPane that contains the GUI of the board
@@ -57,6 +77,7 @@ public class StructureView implements Viewable
 		gridWidth = width;
 		gridHeight = height;
 		cellWidth = determineCellWidth();
+		cellHeight = determineCellHeight();
 	}
 	
 	/**
@@ -64,39 +85,60 @@ public class StructureView implements Viewable
 	 */
 	public void populateGridPane()
 	{
-		for(int i = 0; i < board.length; i++)
+		for(Point point : structure.get().getAllPoints())
 		{
-			for(int j = 0; j < board[i].length; j++)
+			Cell current = structure.get().getCell(point);
+			
+			if(current != null && current.isValid())
 			{
-				Cell current = board[i][j];
-				if(isValidNode(current))
-				{
-					formatAndAddCellView(current,cellWidth,i,j);
-				}
+				formatAndAddCellView(current,point.x,point.y);
 			}
+		}
+	} 
+	
+	/**
+	 * Updates the Structure View by calling all the updateView() methods of the CellViews
+	 */
+	public void updateView()
+	{
+		for(CellView cv : cellViews)
+		{
+			cv.updateView();
 		}
 	}
 	
-	private boolean isValidNode(Cell cell)
+	/**
+	 * Creates a new CellView object for the Cell cell and places the node of the cell at (i,j) in the
+	 * GridPane. Each CellView will have a width of width.
+	 * @param cell - the model for the CellView
+	 * @param width - desired width of the CellView
+	 * @param i - i location of the CellView
+	 * @param j - j location of the CellView
+	 */
+	private void formatAndAddCellView(Cell cell, int row, int col)
 	{
-		return cell != null && !cell.equals(Cell.OUT_OF_BOUNDS);
+		CellView cellView = new CellView(cell,colorMap);
+		cellViews.add(cellView);
+		cellView.setSize(cellWidth,cellHeight);
+		grid.add(cellView.getNode(), col, row);
 	}
 	
-	private void formatAndAddCellView(Cell c, int width, int i, int j)
-	{
-		CellView cellView = c.getView();
-		cellView.setWidth(width);
-		grid.add(cellView.getNode(), i, j);
-	}
-	
+	/**
+	 * @return the desired width for cells
+	 */
 	private int determineCellWidth()
 	{
-		int maxCellHeight = gridWidth/board[0].length;
-		int maxCellWidth = gridHeight/board.length;
-		return Math.min(maxCellHeight, maxCellWidth);
+		int maxCellWidth = gridHeight/structure.get().getWidth();
+		return maxCellWidth;
 	}
 	
-	
-	
+	/**
+	 * @return the desired height for cells
+	 */
+	private int determineCellHeight()
+	{
+		int maxCellHeight = gridWidth/structure.get().getHeight();
+		return maxCellHeight;
+	}
 
 }
