@@ -88,6 +88,9 @@ public abstract class Simulation {
 		addStopButton();
 		addParamChanger();
 		addRandomizeButton();
+		addSquareSelector();
+		addTriangleSelector();
+		addHexagonSelector();
 		
 		colorMap = initColors();
 		initGrid();
@@ -272,5 +275,56 @@ public abstract class Simulation {
 	protected void activateRandom() {
 		root.getChildren().clear();
 		initButtonsAndGrid();
+	}
+	
+	protected void addSquareSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Squares")
+				.setXLocation(20)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateSquares());
+		root.getChildren().add(b);
+	}
+	
+	protected void addTriangleSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Triangles")
+				.setXLocation(220)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateTriangles());
+		root.getChildren().add(b);
+	}
+	
+	protected void addHexagonSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Hexagons")
+				.setXLocation(420)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateHexagons());
+		root.getChildren().add(b);
+	}
+
+	protected void activateSquares() {
+		
+	}
+	
+	protected void activateTriangles() {
+		
+	}
+	
+	protected void activateHexagons() {
+		
 	}
 }
