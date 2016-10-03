@@ -12,85 +12,24 @@ import javafx.scene.paint.Color;
  * @author Ryan Bergamini
  *
  */
-public class TriangleCellView extends CellView
+public class TriangleCellView extends UpDownPolygonCellView
 {
-	private int width;
-	private int height;
-	private Polygon triangle;
-	private boolean isPointingUpwards = true; // Default value, Allows us to call updateTriangle() in the initShapeMethod
 	
-	/**
-	 * Creates a new TriangleCellView
-	 * @param cell- cell the View represents
-	 * @param map - the map that defines the Color-State pairings
-	 * @param isPointingUpwards - true if you want to create an upwards pointing triangle node
-	 */
 	public TriangleCellView(Cell cell, ColorMap map, boolean isPointingUpwards) 
 	{
-		super(cell, map);
-		this.width = DEFAULT_WIDTH;
-		this.height = DEFAULT_HEIGHT;
-		this.isPointingUpwards = isPointingUpwards;
-		
-		triangle = updateTriangle();
-	}
-	
-	/**
-	 * Sets the view to represent a triangle pointing upwards
-	 */
-	public void setPointingUpwards()
-	{
-		isPointingUpwards = true;
-	}
-	
-	/**
-	 * Sets the view to represent a triangle pointing downwards
-	 */
-	public void setPointingDownwards()
-	{
-		isPointingUpwards = false;
-	}
-	
-	@Override
-	public void setSize(int width, int height)
-	{
-		this.width = width;
-		this.height = height;
-		triangle = updateTriangle();
+		super(cell, map, isPointingUpwards);
 	}
 
 	@Override
-	public Node getNode()
+	protected Polygon generateUpPolygon() 
 	{
-		updateView();
-		return triangle;
+		return  new Polygon(0.0,getHeight(),getWidth(),getHeight(),getWidth()/2.0,0.0);
 	}
-	
 
 	@Override
-	protected Shape initShape() 
+	protected Polygon generateDownPolygon() 
 	{
-		return updateTriangle();
-	}
-	
-	@Override
-	protected void setColor(Color c)
-	{
-		triangle.setFill(c);
-	}
-	
-
-	private Polygon updateTriangle()
-	{
-
-		if(isPointingUpwards)
-		{
-			return new Polygon(0.0,height,width,height,width/2.0,0.0);
-		}
-		else
-		{
-			return new Polygon(0.0, 0.0,width, 0.0,width/2.0,height);
-		}
+		return new Polygon(0.0, 0.0,getWidth(), 0.0,getWidth()/2.0,getHeight());
 	}
 	
 

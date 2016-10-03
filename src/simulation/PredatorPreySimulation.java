@@ -98,7 +98,7 @@ public class PredatorPreySimulation extends Simulation {
 	}
 	
 	private void moveSharks() {
-		nextState = new State[rows][columns];
+		nextState = new State[grid.getHeight()][grid.getWidth()];
 		
 		State moveFrom = stateShark;
 		State[] moveTo = {stateEmpty, stateFish};
@@ -108,7 +108,7 @@ public class PredatorPreySimulation extends Simulation {
 	}
 	
 	private void moveFish() {		
-		nextState = new State[rows][columns];
+		nextState = new State[grid.getHeight()][grid.getWidth()];
 		
 		State moveFrom = stateFish;
 		State[] moveTo = {stateEmpty};

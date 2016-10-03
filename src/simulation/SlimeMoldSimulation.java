@@ -31,7 +31,7 @@ public class SlimeMoldSimulation extends Simulation {
 	
 	public SlimeMoldSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns) {
 		super(goToMenu, rows, columns);
-		cAMP = new double[rows][columns];
+		cAMP = new double[grid.getHeight()][grid.getWidth()];
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class SlimeMoldSimulation extends Simulation {
 	}
 	
 	private void calculateNextStates() {
-		nextState = new State[rows][columns];
+		nextState = new State[grid.getHeight()][grid.getWidth()];
 		
 		for (Point point : grid.getPointsOnBoard()) {
 			int row = point.x;

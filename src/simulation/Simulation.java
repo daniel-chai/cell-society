@@ -5,10 +5,6 @@ import structure.HexagonStructure;
 import structure.RectangleStructure;
 import structure.Structure;
 import structure.TriangleStructure;
-<<<<<<< HEAD
-=======
-import structure_view.StructureView;
->>>>>>> feef21d8e6c19cba7ff053eca1418e9f9a0778f4
 
 import java.util.Map;
 
@@ -29,12 +25,14 @@ import javafx.scene.shape.Shape;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import neighborhood.Neighborhood;
+import neighborhood_definer.HexagonNeighborhoodDefiner;
 import neighborhood_definer.NeighborhoodDefiner;
 
 import java.util.Collection;
 import java.awt.Point;
 
 import ui_components.ButtonBuilder;
+import view.HexagonStructureView;
 import view.StructureView;
 import view.TriangleStructureView;
 
@@ -106,7 +104,7 @@ public abstract class Simulation {
 	
 	protected Structure initStructure()
 	{
-		return new TriangleStructure(rows);
+		return new HexagonStructure(rows);
 	}
 	
 	protected abstract void initStates();	
@@ -114,12 +112,12 @@ public abstract class Simulation {
 	protected void initNeighbors() 
 	{
 		NeighborhoodDefiner neighborhoodDefiner = getNeighborhoodDefiner();
-		grid.calculateNeighborsForCells(neighborhoodDefiner);
+		grid.calculateNeighborsForCells(new HexagonNeighborhoodDefiner());//neighborhoodDefiner);
 	}
 	
 	protected StructureView initStructureView() 
 	{
-		return new TriangleStructureView((TriangleStructure)grid,colorMap,500,500);
+		return new HexagonStructureView((HexagonStructure)grid,colorMap,450,450);
 	}
 	
 	protected void displayGrid() 

@@ -73,7 +73,7 @@ public class FireSimulation extends Simulation {
 	}
 	
 	private void calculateNextStates() {
-		nextState = new State[rows][columns];
+		nextState = new State[grid.getHeight()][grid.getWidth()];
 		
 		for (Point point : grid.getPointsOnBoard())
 		{

@@ -12,12 +12,11 @@ import javafx.scene.paint.Color;
  * @author Ryan Bergamini
  *
  */
-public class TriangleCellView extends CellView
+public abstract class PolygonCellView extends CellView
 {
 	private int width;
 	private int height;
-	private Polygon triangle;
-	private boolean isPointingUpwards = true; // Default value, Allows us to call updateTriangle() in the initShapeMethod
+	private Polygon polygon;
 	
 	/**
 	 * Creates a new TriangleCellView
@@ -25,14 +24,13 @@ public class TriangleCellView extends CellView
 	 * @param map - the map that defines the Color-State pairings
 	 * @param isPointingUpwards - true if you want to create an upwards pointing triangle node
 	 */
-	public TriangleCellView(Cell cell, ColorMap map, boolean isPointingUpwards) 
+	public PolygonCellView(Cell cell, ColorMap map) 
 	{
 		super(cell, map);
 		this.width = DEFAULT_WIDTH;
 		this.height = DEFAULT_HEIGHT;
-		this.isPointingUpwards = isPointingUpwards;
 		
-		triangle = updatePolygon();
+		polygon = updatePolygon();
 	}
 	
 	@Override
@@ -40,14 +38,14 @@ public class TriangleCellView extends CellView
 	{
 		this.width = width;
 		this.height = height;
-		triangle = updatePolygon();
+		polygon = updatePolygon();
 	}
 
 	@Override
 	public Node getNode()
 	{
 		updateView();
-		return triangle;
+		return polygon;
 	}
 	
 
@@ -58,12 +56,34 @@ public class TriangleCellView extends CellView
 	}
 	
 	@Override
+	/**
+	 * Sets the color of the Polygon to c
+	 */
 	protected void setColor(Color c)
 	{
-		triangle.setFill(c);
+		polygon.setFill(c);
 	}
+	
+	/**
+	 * Allows subclasses to create Polygons based on width
+	 * @return width of CellView
+	 */
+	protected int getWidth()
+	{
+		return width;
+	}
+	
+	/**
+	 * Allows subclasses to create Polygons based on height
+	 * @return height of CellView
+	 */
+	protected int getHeight()
+	{
+		return height;
+	}
+	
 	
 
 	abstract protected Polygon updatePolygon();
-
+}
 	
