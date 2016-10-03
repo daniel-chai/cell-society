@@ -63,10 +63,9 @@ public class PredatorPreySimulation extends Simulation {
 	
 	@Override
 	protected void initStates() {
-		for(Point p : grid.getPointsOnBoard())
-		{
+		for (Point point : grid.getPointsOnBoard()) {
 			Cell cell = new Cell(generateRandomState());
-			grid.addCell(cell,p);
+			grid.addCell(cell, point);
 		}
 	}
 	
@@ -99,7 +98,7 @@ public class PredatorPreySimulation extends Simulation {
 	}
 	
 	private void moveSharks() {
-		nextState = new State[grid.getHeight()][grid.getWidth()];
+		nextState = new State[rows][columns];
 		
 		State moveFrom = stateShark;
 		State[] moveTo = {stateEmpty, stateFish};
@@ -109,7 +108,7 @@ public class PredatorPreySimulation extends Simulation {
 	}
 	
 	private void moveFish() {		
-		nextState = new State[grid.getHeight()][grid.getWidth()];
+		nextState = new State[rows][columns];
 		
 		State moveFrom = stateFish;
 		State[] moveTo = {stateEmpty};

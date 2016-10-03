@@ -56,11 +56,8 @@ public class SegregationSimulation extends Simulation {
 	@Override
 	protected void initStates() {
 		for (Point point : grid.getPointsOnBoard()) {
-				int row = point.x;
-				int col = point.y;
-				
-				Cell cell = new Cell(generateRandomState());
-				grid.addCell(cell, row, col);
+			Cell cell = new Cell(generateRandomState());
+			grid.addCell(cell, point);
 		}
 	}
 	

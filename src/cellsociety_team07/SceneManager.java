@@ -10,6 +10,7 @@ import simulation.FireSimulation;
 import simulation.GameOfLifeSimulation;
 import simulation.PredatorPreySimulation;
 import simulation.SegregationSimulation;
+import simulation.SlimeMoldSimulation;
 import xml.FireData;
 import xml.LifeData;
 import xml.PredData;
@@ -34,6 +35,7 @@ public class SceneManager {
 	private EventHandler<ActionEvent> goToPredatorPrey;
 	private EventHandler<ActionEvent> goToFire;
 	private EventHandler<ActionEvent> goToGameOfLife;
+	private EventHandler<ActionEvent> goToSlimeMold;
 	
 	/**
 	 * Constructor for SceneManager class
@@ -83,10 +85,17 @@ public class SceneManager {
 				goToGameOfLifeScene();
 			}
 		};
+		
+		goToSlimeMold = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				goToSlimeMoldScene();
+			}
+		};
 	}
 	
 	private void goToMenuScene() {
-		Menu menu = new Menu(goToSegregation, goToPredatorPrey, goToFire, goToGameOfLife);
+		Menu menu = new Menu(goToSegregation, goToPredatorPrey, goToFire, goToGameOfLife, goToSlimeMold);
 		Scene menuScene = menu.init();
 		stage.setScene(menuScene);
 	}
@@ -136,6 +145,12 @@ public class SceneManager {
 		int cols = data.getMyNumCols();
 		
 		GameOfLifeSimulation simulation = new GameOfLifeSimulation(goToMenu, rows, cols);
+		Scene simulationScene = simulation.init();
+		stage.setScene(simulationScene);
+	}
+	
+	private void goToSlimeMoldScene() {
+		SlimeMoldSimulation simulation = new SlimeMoldSimulation(goToMenu, 20, 20);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}

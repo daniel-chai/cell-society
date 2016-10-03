@@ -46,13 +46,9 @@ public class GameOfLifeSimulation extends Simulation {
 	
 	@Override
 	protected void initStates() {
-		for (Point p : grid.getPointsOnBoard())
-		{
-				int row = p.x;
-				int col = p.y;
-				
-				Cell cell = new Cell(generateRandomState());
-				grid.addCell(cell, row, col);
+		for (Point point : grid.getPointsOnBoard()) {
+			Cell cell = new Cell(generateRandomState());
+			grid.addCell(cell, point);
 		}
 	}
 	
@@ -77,7 +73,7 @@ public class GameOfLifeSimulation extends Simulation {
 	}
 	
 	private void calculateNextStates() {
-		nextState = new State[grid.getHeight()][grid.getWidth()];
+		nextState = new State[rows][columns];
 		
 		for (Point p : grid.getPointsOnBoard())
 		{

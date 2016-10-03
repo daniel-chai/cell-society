@@ -1,7 +1,10 @@
 package simulation;
 
+import structure.CircleStructure;
+import structure.HexagonStructure;
 import structure.RectangleStructure;
 import structure.Structure;
+import structure.TriangleStructure;
 import structure_view.StructureView;
 
 import java.util.Map;
@@ -111,7 +114,7 @@ public abstract class Simulation {
 	
 	protected StructureView initStructureView() 
 	{
-		return new StructureView(grid,colorMap,300,300);
+		return new StructureView(grid,colorMap,500,500);
 	}
 	
 	protected void displayGrid() 

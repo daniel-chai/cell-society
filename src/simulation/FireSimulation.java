@@ -55,13 +55,9 @@ public class FireSimulation extends Simulation {
 	
 	@Override
 	protected void initStates() {
-		for(Point p : grid.getPointsOnBoard())
-		{
-			int row = p.x;
-			int col = p.y;
-			
+		for(Point point : grid.getPointsOnBoard()) {
 			Cell cell = new Cell(stateTree);
-			grid.addCell(cell, row, col);	
+			grid.addCell(cell, point);	
 		}
 		
 		Cell cell = new Cell(stateBurning);
@@ -77,7 +73,7 @@ public class FireSimulation extends Simulation {
 	}
 	
 	private void calculateNextStates() {
-		nextState = new State[grid.getHeight()][grid.getWidth()];
+		nextState = new State[rows][columns];
 		
 		for (Point point : grid.getPointsOnBoard())
 		{

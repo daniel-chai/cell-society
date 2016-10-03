@@ -22,7 +22,7 @@ public class CellView implements Viewable
 	 */
 	public CellView(Cell c, ColorMap m)
 	{
-		this.view = new Circle();
+		this.view = new Rectangle();
 		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
 		this.cell = c;
 		this.colorMap = m;
@@ -45,9 +45,9 @@ public class CellView implements Viewable
 	 */
 	public void setSize(int width, int height)
 	{
-		((Circle)view).setRadius(Math.min(width, height));
-		//((Rectangle)view).setWidth(width);
-		//((Rectangle)view).setHeight(height);
+//		((Circle)view).setRadius(Math.min(width, height));
+		((Rectangle)view).setWidth(width);
+		((Rectangle)view).setHeight(height);
 	}
 	
 	/**
