@@ -26,11 +26,13 @@ public class SlimeMoldSimulation extends Simulation {
 	private static final State stateMold = new State("MOLD");
 	
 	private double[][] cAMP;
-	private double depositRate = 1.0;
-	private double evaporationRate = 0.5;
+	private double depositRate;
+	private double evaporationRate;
 	
-	public SlimeMoldSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns) {
+	public SlimeMoldSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns, double depositRate, double evaporationRate) {
 		super(goToMenu, rows, columns);
+		this.depositRate = depositRate;
+		this.evaporationRate = evaporationRate;
 		init();
 		cAMP = new double[grid.getHeight()][grid.getWidth()];
 	}
