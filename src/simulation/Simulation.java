@@ -121,7 +121,7 @@ public abstract class Simulation {
 	
 	protected StructureView initStructureView() 
 	{
-		return new HexagonStructureView((HexagonStructure)grid,colorMap,450,450);
+		return new HexagonStructureView((HexagonStructure)grid,colorMap,400,400);
 	}
 	
 	protected void displayGrid() 

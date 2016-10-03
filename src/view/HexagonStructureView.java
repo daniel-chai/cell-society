@@ -14,7 +14,7 @@ public class HexagonStructureView extends StructureView
 	@Override
 	protected CellView getCellView(Cell cell, int row, int col, ColorMap cm) 
 	{
-		if(isSumeOfCoordinatesEven(row,col))
+		if(isEven(col))
 		{
 			return new HexagonCellView(cell,cm,true);
 		}
@@ -24,8 +24,8 @@ public class HexagonStructureView extends StructureView
 		}
 	}
 	
-	private boolean isSumeOfCoordinatesEven(int row,int col)
+	private boolean isEven(int col)
 	{
-		return (row + col) % 2 == 0;
+		return col % 2 == 0;
 	}
 }
