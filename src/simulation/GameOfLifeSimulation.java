@@ -122,18 +122,6 @@ public class GameOfLifeSimulation extends Simulation {
 	}
 	
 	@Override
-	protected StructureView initStructureView() 
-	{
-		return new StructureView(grid,colorMap,300,300);
-	}
-
-	@Override
-	protected Structure initStructure()
-	{
-		return new RectangleStructure(rows, columns);
-	}
-	
-	@Override
 	public NeighborhoodDefiner getNeighborhoodDefiner()
 	{
 		return new RectangleNeighborhoodDefiner(RectangleNeighborhoodDefiner.SURROUNDING_POINTS_COLLECTION);

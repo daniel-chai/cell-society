@@ -1,5 +1,6 @@
 package simulation;
 
+import structure.RectangleStructure;
 import structure.Structure;
 import structure_view.StructureView;
 
@@ -79,11 +80,6 @@ public abstract class Simulation {
 	
 	protected abstract ColorMap initColors();
 	
-	protected void displayGrid() 
-	{		
-		gridView.updateView();
-	}
-	
 	protected void initGrid() {
 		grid = initStructure();		
 		initStates();
@@ -100,12 +96,10 @@ public abstract class Simulation {
 		displayGrid();
 	}
 	
-	protected StructureView initStructureView() 
+	protected Structure initStructure()
 	{
-		return new StructureView(grid,colorMap,300,300);
+		return new RectangleStructure(rows, columns);
 	}
-	
-	protected abstract Structure initStructure();
 	
 	protected abstract void initStates();	
 	
@@ -113,6 +107,16 @@ public abstract class Simulation {
 	{
 		NeighborhoodDefiner neighborhoodDefiner = getNeighborhoodDefiner();
 		grid.calculateNeighborsForCells(neighborhoodDefiner);
+	}
+	
+	protected StructureView initStructureView() 
+	{
+		return new StructureView(grid,colorMap,300,300);
+	}
+	
+	protected void displayGrid() 
+	{		
+		gridView.updateView();
 	}
 	
 	protected abstract void updateGrid();

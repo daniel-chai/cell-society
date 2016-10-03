@@ -127,18 +127,6 @@ public class FireSimulation extends Simulation {
 	}
 	
 	@Override
-	protected StructureView initStructureView() 
-	{
-		return new StructureView(grid,colorMap,300,300);
-	}
-	
-	@Override
-	protected Structure initStructure()
-	{
-		return new RectangleStructure(rows, columns);
-	}
-	
-	@Override
 	public NeighborhoodDefiner getNeighborhoodDefiner()
 	{
 		return new RectangleNeighborhoodDefiner(RectangleNeighborhoodDefiner.CROSS_POINTS_COLLECTION);
