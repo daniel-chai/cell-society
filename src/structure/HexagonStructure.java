@@ -1,6 +1,5 @@
-package cellsociety_team07;
+package structure;
 
-import structure.Structure;
 import javafx.scene.Node;
 import java.awt.Point;
 import java.util.Collection;
@@ -10,10 +9,10 @@ import java.util.ArrayList;
  * Creates a Hexagon shaped grid
  * @author Ryan Bergamini
  */
-public class HexagonGrid extends Structure
+public class HexagonStructure extends Structure
 {
 	
-	public HexagonGrid(int sideLength)
+	public HexagonStructure(int sideLength)
 	{
 		// 3 and 2 are not the magic numbers, they are adjusted to contain the contents of the HexGrid
 		super(hexagonalHeightOffset(sideLength),hexagonalWidthOffset(sideLength),getOutOfBoundsPoints(sideLength));

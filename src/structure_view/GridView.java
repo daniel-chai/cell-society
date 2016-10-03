@@ -1,7 +1,7 @@
-package structure;
+package structure_view;
 
-import cellsociety_team07.Grid;
 import cellsociety_team07.ColorMap;
+import structure.RectangleStructure;
 
 /**
  * Creates a View for the Grid class. This class follows the protocol that
@@ -11,7 +11,7 @@ import cellsociety_team07.ColorMap;
  */
 public class GridView extends StructureView
 {
-	public GridView(Grid grid, ColorMap cm, int width, int height)
+	public GridView(RectangleStructure grid, ColorMap cm, int width, int height)
 	{
 		super(grid,cm,width,height);
 	}

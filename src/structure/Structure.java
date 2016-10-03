@@ -7,6 +7,8 @@ import java.awt.Point;
 import java.util.Map;
 import java.util.HashMap;
 import javafx.scene.Node;
+import neighborhood_definer.NeighborhoodDefiner;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -18,7 +20,6 @@ import java.util.Collections;
  */
 public abstract class Structure implements Iterable<Cell>
 {
-	//private Cell[][] board;
 	private Map<Point,Cell> board;
 	private int numCols;
 	private int numRows;
@@ -162,25 +163,21 @@ public abstract class Structure implements Iterable<Cell>
 	 * next to the Cell, you would pass a Collection of Points containing:
 	 * (-1,0),(-1,1),(0,1),(1,1),(1,1),(1,-1),(0,-1),(-1,-1)
 	 */
-	public void calculateNeighborsForCells(Collection<Point> neighbors)
+	public void calculateNeighborsForCells(NeighborhoodDefiner neighborDefiner)
 	{
-		if(neighbors.contains(new Point(0,0)))
-		{
-			neighbors.remove(new Point(0,0));
-		}
-		
 		for(Point cellPoint : getPointsOnBoard())
 		{
 			Cell currentCell = getCell(cellPoint);
 			
 			if(currentCell != null && currentCell.isValid())
 			{
-				for(Point relativePoint : neighbors)
+				Collection<Point> neighbors = neighborDefiner.getPotentialNeighbors(cellPoint);
+				
+				for(Point possiblePoint : neighbors)
 				{
-					Point actualPoint = new Point(cellPoint.x+relativePoint.x,cellPoint.y+relativePoint.y);
-					if(isValidCellAt(actualPoint))
+					if(isValidCellAt(possiblePoint))
 					{
-						currentCell.getNeighborhood().addNeighbor(getCell(actualPoint));
+						currentCell.getNeighborhood().addNeighbor(getCell(possiblePoint));
 					}
 				}
 			}

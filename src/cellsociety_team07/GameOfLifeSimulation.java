@@ -11,10 +11,12 @@ import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
-import structure.GridView;
-import structure.HexagonGridView;
+import neighborhood.Neighborhood;
+import structure.RectangleStructure;
 import structure.Structure;
-import structure.StructureView;
+import structure_view.GridView;
+import structure_view.HexagonGridView;
+import structure_view.StructureView;
 
 /**
  * This class implements the Game-of-Life simulation
@@ -123,7 +125,7 @@ public class GameOfLifeSimulation extends Simulation {
 	@Override
 	protected Structure initStructure()
 	{
-		return new Grid(rows, columns);
+		return new RectangleStructure(rows, columns);
 	}
 	
 	@Override

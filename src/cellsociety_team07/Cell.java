@@ -1,4 +1,7 @@
 package cellsociety_team07;
+
+import neighborhood.Neighborhood;
+
 /**
  * This class represents a single Cell in a grid.
  * 

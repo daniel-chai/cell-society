@@ -1,14 +1,12 @@
-package cellsociety_team07;
+package structure;
 
 import java.util.Collection;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import structure.Structure;
-
-public class TriangleGrid extends Structure
+public class TriangleStructure extends Structure
 {
-	public TriangleGrid(int height)
+	public TriangleStructure(int height)
 	{
 		super(height,calculateWidth(height),getOutOfBoundsPoints(height));
 	}

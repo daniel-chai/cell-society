@@ -1,4 +1,4 @@
-package structure;
+package structure_view;
 
 import cellsociety_team07.Cell;
 import cellsociety_team07.CellView;
@@ -10,7 +10,8 @@ import java.awt.Point;
 import java.lang.ref.SoftReference;
 import java.util.Collection;
 import java.util.ArrayList;
-import javafx.scene.shape.Circle;;
+import javafx.scene.shape.Circle;
+import structure.Structure;;
 
 /**
  * This class handles the graphical rendering of the Structure class. It has a pointer

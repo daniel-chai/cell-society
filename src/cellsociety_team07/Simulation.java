@@ -1,7 +1,7 @@
 package cellsociety_team07;
 
 import structure.Structure;
-import structure.StructureView;
+import structure_view.StructureView;
 
 import java.util.Map;
 
@@ -17,6 +17,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import neighborhood.Neighborhood;
+import neighborhood_definer.NeighborhoodDefiner;
+
 import java.util.Collection;
 import java.awt.Point;
 
@@ -104,13 +107,13 @@ public abstract class Simulation {
 	
 	protected void initNeighbors() 
 	{
-		Collection<Point> neighborLocations = getNeighborDisplacements();
-		grid.calculateNeighborsForCells(neighborLocations);
+		NeighborhoodDefiner neighborhoodDefiner = getNeighborhoodDefiner();
+		grid.calculateNeighborsForCells(neighborhoodDefiner);
 	}
 	
 	protected abstract void updateGrid();
 	
-	protected abstract Collection<Point> getNeighborDisplacements();
+	protected abstract NeighborhoodDefiner getNeighborhoodDefiner();
 	
 	protected void addMenuButton() {
 		Button menuButton = new ButtonBuilder().setText("Back To Menu")

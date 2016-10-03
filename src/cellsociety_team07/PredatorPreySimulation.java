@@ -1,8 +1,12 @@
 package cellsociety_team07;
 
 import java.awt.Point;
-import structure.GridView;
+
+import structure.RectangleStructure;
 import structure.Structure;
+import structure_view.GridView;
+import structure_view.HexagonGridView;
+import structure_view.StructureView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,11 +19,10 @@ import java.util.TreeSet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
+import neighborhood.Neighborhood;
+
 import java.util.Collection;
 import java.util.Collections;
-
-import structure.StructureView;
-import structure.HexagonGridView;
 
 /**
  * This class implements the Predator-Prey simulation.
@@ -231,7 +234,7 @@ public class PredatorPreySimulation extends Simulation {
 	@Override
 	protected Structure initStructure()
 	{
-		return new Grid(rows, columns);
+		return new RectangleStructure(rows, columns);
 	}
 	
 	@Override

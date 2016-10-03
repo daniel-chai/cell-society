@@ -11,10 +11,12 @@ import java.util.Collection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
-import structure.GridView;
+import neighborhood.Neighborhood;
+import structure.RectangleStructure;
 import structure.Structure;
-import structure.StructureView;
-import structure.HexagonGridView;
+import structure_view.GridView;
+import structure_view.HexagonGridView;
+import structure_view.StructureView;
 
 /**
  * This class implements the Fire simulation.
@@ -126,7 +128,7 @@ public class FireSimulation extends Simulation {
 	@Override
 	protected Structure initStructure()
 	{
-		return new Grid(rows, columns);
+		return new RectangleStructure(rows, columns);
 	}
 	
 	@Override
