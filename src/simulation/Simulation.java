@@ -76,16 +76,21 @@ public abstract class Simulation {
 		root = new Group();
 		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
 		
+		initButtonsAndGrid();
+		
+		return simulationScene;
+	}
+	
+	protected void initButtonsAndGrid() {
 		addMenuButton();
 		addStepButton();
 		addPlayButton();
 		addStopButton();
 		addParamChanger();
+		addRandomizeButton();
 		
 		colorMap = initColors();
 		initGrid();
-		
-		return simulationScene;
 	}
 	
 	protected abstract ColorMap initColors();
@@ -248,11 +253,24 @@ public abstract class Simulation {
 		rows = Integer.parseInt(rowField.getText());
 		columns = Integer.parseInt(colField.getText());
 		root.getChildren().clear();
-		addMenuButton();
-		addStepButton();
-		addPlayButton();
-		addStopButton();
-		addParamChanger();
-		initGrid();
+		initButtonsAndGrid();
+	}
+	
+	protected void addRandomizeButton() {
+		Button randomButton = new ButtonBuilder().setText("Randomize States")
+				.setXLocation(500)
+				.setYLocation(625)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+
+		randomButton.setOnAction(e -> activateRandom());
+		root.getChildren().add(randomButton);
+	}
+	
+	protected void activateRandom() {
+		root.getChildren().clear();
+		initButtonsAndGrid();
 	}
 }
