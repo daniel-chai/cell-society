@@ -1,10 +1,14 @@
-package cellsociety_team07;
+package simulation;
 
 import structure.Structure;
 import structure_view.StructureView;
 
 import java.util.Map;
 
+import cellsociety_team07.Cell;
+import cellsociety_team07.ColorMap;
+import cellsociety_team07.Main;
+import cellsociety_team07.State;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

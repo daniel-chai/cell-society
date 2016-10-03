@@ -1,14 +1,12 @@
-package cellsociety_team07;
+package structure;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import structure.Structure;
-
-public class CircleGrid extends Structure
+public class CircleStructure extends Structure
 {
-	public CircleGrid(int radius)
+	public CircleStructure(int radius)
 	{
 		// 3 and 2 are not the magic numbers, they are adjusted to contain the contents of the HexGrid
 		super(circlealHeightOffset(radius),circlealWidthOffset(radius),getOutOfBoundsPoints(radius));

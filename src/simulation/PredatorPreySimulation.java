@@ -1,4 +1,4 @@
-package cellsociety_team07;
+package simulation;
 
 import java.awt.Point;
 
@@ -16,10 +16,16 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import cellsociety_team07.Cell;
+import cellsociety_team07.ColorMap;
+import cellsociety_team07.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import neighborhood.Neighborhood;
+
+import neighborhood_definer.NeighborhoodDefiner;
+import neighborhood_definer.RectangleNeighborhoodDefiner;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -238,8 +244,10 @@ public class PredatorPreySimulation extends Simulation {
 	}
 	
 	@Override
-	public Collection<Point> getNeighborDisplacements()
+	public NeighborhoodDefiner getNeighborhoodDefiner()
 	{
-		return Neighborhood.RECTANGLE_CROSS_POINTS_COLLECTION;
+		return new RectangleNeighborhoodDefiner(RectangleNeighborhoodDefiner.CROSS_POINTS_COLLECTION);
 	}
+
+	
 }

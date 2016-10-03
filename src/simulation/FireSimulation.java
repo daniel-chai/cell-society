@@ -1,4 +1,4 @@
-package cellsociety_team07;
+package simulation;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -6,12 +6,19 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
+import cellsociety_team07.Cell;
+import cellsociety_team07.ColorMap;
+import cellsociety_team07.State;
+
 import java.util.Collection;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
 import neighborhood.Neighborhood;
+import neighborhood_definer.NeighborhoodDefiner;
+import neighborhood_definer.RectangleNeighborhoodDefiner;
 import structure.RectangleStructure;
 import structure.Structure;
 import structure_view.GridView;
@@ -132,8 +139,8 @@ public class FireSimulation extends Simulation {
 	}
 	
 	@Override
-	public Collection<Point> getNeighborDisplacements()
+	public NeighborhoodDefiner getNeighborhoodDefiner()
 	{
-		return Neighborhood.RECTANGLE_CROSS_POINTS_COLLECTION;
+		return new RectangleNeighborhoodDefiner(RectangleNeighborhoodDefiner.CROSS_POINTS_COLLECTION);
 	}
 }
