@@ -36,6 +36,7 @@ import java.awt.Point;
 
 import ui_components.ButtonBuilder;
 import view.HexagonStructureView;
+import view.RectangleStructureView;
 import view.StructureView;
 import view.TriangleStructureView;
 
@@ -113,7 +114,7 @@ public abstract class Simulation {
 	
 	protected Structure initStructure()
 	{
-		return new HexagonStructure(rows);
+		return new RectangleStructure(rows,columns);
 	}
 	
 	protected abstract void initStates();	
@@ -121,12 +122,13 @@ public abstract class Simulation {
 	protected void initNeighbors() 
 	{
 		NeighborhoodDefiner neighborhoodDefiner = getNeighborhoodDefiner();
+		
 		grid.calculateNeighborsForCells(neighborhoodDefiner);
 	}
 	
 	protected StructureView initStructureView() 
 	{
-		return new HexagonStructureView((HexagonStructure)grid,colorMap,400,400);
+		return new RectangleStructureView((RectangleStructure)grid,colorMap,400,400);
 	}
 	
 	protected void displayGrid() 

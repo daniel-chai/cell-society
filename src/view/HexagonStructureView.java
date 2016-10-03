@@ -14,18 +14,7 @@ public class HexagonStructureView extends StructureView
 	@Override
 	protected CellView getCellView(Cell cell, int row, int col, ColorMap cm) 
 	{
-		if(isEven(col))
-		{
-			return new HexagonCellView(cell,cm,true);
-		}
-		else
-		{
-			return new HexagonCellView(cell,cm,false);
-		}
+		return new HexagonCellView(cell,cm,col);
 	}
 	
-	private boolean isEven(int col)
-	{
-		return col % 2 == 0;
-	}
 }

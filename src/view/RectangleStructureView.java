@@ -20,6 +20,7 @@ public class RectangleStructureView extends StructureView
 	@Override
 	protected CellView getCellView(Cell cell, int row, int col, ColorMap cm) 
 	{
-		return new RectangleCellView(cell,cm);
+		return new HexagonCellView(cell,cm,col);
 	}
+	
 }

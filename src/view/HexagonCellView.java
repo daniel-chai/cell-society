@@ -23,9 +23,9 @@ public class HexagonCellView extends UpDownPolygonCellView
 	 * @param map - the map that defines the Color-State pairings
 	 * @param isPointingUpwards - true if you want to create an upwards pointing hexagon node
 	 */
-	public HexagonCellView(Cell cell, ColorMap map, boolean isUp) 
+	public HexagonCellView(Cell cell, ColorMap map,int col) 
 	{
-		super(cell, map, isUp);
+		super(cell, map, isEven(col));
 	}
 
 	@Override
@@ -54,6 +54,11 @@ public class HexagonCellView extends UpDownPolygonCellView
 									  0.0,getHeight()/3.0,
 									  getWidth()/2.0,0);
 		return hexagon;
+	}
+	
+	private static boolean isEven(int col)
+	{
+		return col % 2 == 0;
 	}
 	
 }
