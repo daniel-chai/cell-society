@@ -61,26 +61,6 @@ public class GameOfLifeSimulation extends Simulation {
 		}
 	}
 	
-	public Collection<Point> getNeighborDisplacements()
-	{
-		ArrayList<Point> neighborDisplacements = new ArrayList<Point>();
-		
-		for(int i = -1; i <= 1; i++)
-		{
-			for(int j = -1; j <= 1; j++)
-			{
-				if(i == 0 && i == j)
-				{
-					continue;
-				}
-				
-				neighborDisplacements.add(new Point(i,j));
-			}
-		}
-		
-		return neighborDisplacements;
-	}
-	
 	@Override
 	protected void updateGrid() {
 		calculateNextStates();
@@ -143,6 +123,12 @@ public class GameOfLifeSimulation extends Simulation {
 	@Override
 	protected Structure initStructure()
 	{
-		return new HexagonGrid(10);
+		return new Grid(rows, columns);
+	}
+	
+	@Override
+	public Collection<Point> getNeighborDisplacements()
+	{
+		return Neighborhood.RECTANGLE_SURROUNDING_POINTS_COLLECTION;
 	}
 }

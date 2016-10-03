@@ -53,17 +53,6 @@ public class PredatorPreySimulation extends Simulation {
 	}
 	
 	@Override
-	protected StructureView initStructureView() 
-	{
-		return new StructureView(grid,colorMap,300,300);
-	}
-	
-	protected Structure initStructure()
-	{
-		return new CircleGrid(6);
-	}
-	
-	@Override
 	protected void initStates() {
 		for(Point p : grid.getPointsOnBoard())
 		{
@@ -87,11 +76,6 @@ public class PredatorPreySimulation extends Simulation {
 		}
 	}
 	
-	public Collection<Point> getNeighborDisplacements()
-	{
-		return Neighborhood.CROSS_POINTS_COLLECTION;
-	}
-
 	@Override
 	protected void updateGrid() {
 		moveSharks();
@@ -236,5 +220,23 @@ public class PredatorPreySimulation extends Simulation {
 		Point neighborLocation = grid.getLocation(randomCell);		
 		nextState[neighborLocation.x][neighborLocation.y] = cell.getState();
 		nextState[row][col] = cell.getState();				
+	}
+	
+	@Override
+	protected StructureView initStructureView() 
+	{
+		return new StructureView(grid,colorMap,300,300);
+	}
+	
+	@Override
+	protected Structure initStructure()
+	{
+		return new Grid(rows, columns);
+	}
+	
+	@Override
+	public Collection<Point> getNeighborDisplacements()
+	{
+		return Neighborhood.RECTANGLE_CROSS_POINTS_COLLECTION;
 	}
 }

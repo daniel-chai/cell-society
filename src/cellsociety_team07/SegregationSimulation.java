@@ -29,7 +29,6 @@ public class SegregationSimulation extends Simulation {
 	private static final State stateEmpty = new State("EMPTY");
 	
 	private double threshold;
-	private StructureView boardView;
 
 	public SegregationSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns, double threshold) {
 		super(goToMenu, rows, columns);
@@ -68,27 +67,6 @@ public class SegregationSimulation extends Simulation {
 		}
 		else {
 			return stateEmpty;
-		}
-	}
-	
-	@Override
-	public Collection<Point> getNeighborDisplacements()
-	{
-		return Neighborhood.SURROUNDING_POINTS_COLLECTION;
-	}
-	
-	protected void calculateNeighbors(Cell cell, int row, int col) {
-		for (int i = -1; i <= 1; i++) {
-			for (int j = -1; j <= 1; j++) {
-				if (i == 0 && j == 0) {
-					continue;
-				}
-				if (i + row < 0 || i + row >= rows || j + col < 0 || j + col >= columns) {
-					continue;
-				}
-				Cell neighbor = grid.getCell(row + i, col + j);
-				cell.getNeighborhood().addNeighbor(neighbor);
-			}
 		}
 	}
 	
@@ -191,6 +169,12 @@ public class SegregationSimulation extends Simulation {
 	@Override
 	protected Structure initStructure()
 	{
-		return new HexagonGrid(10);
+		return new Grid(rows, columns);
+	}
+	
+	@Override
+	public Collection<Point> getNeighborDisplacements()
+	{
+		return Neighborhood.RECTANGLE_SURROUNDING_POINTS_COLLECTION;
 	}
 }

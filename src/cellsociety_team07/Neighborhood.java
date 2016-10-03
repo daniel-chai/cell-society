@@ -14,8 +14,8 @@ import java.awt.Point;
 public class Neighborhood {
 	private List<Cell> neighbors;
 	
-	public static final Collection<Point> SURROUNDING_POINTS_COLLECTION = Collections.unmodifiableCollection(generateSurroundingPointsCollection());
-	public static final Collection<Point> CROSS_POINTS_COLLECTION = Collections.unmodifiableCollection(generateCrossPointsCollection());
+	public static final Collection<Point> RECTANGLE_SURROUNDING_POINTS_COLLECTION = Collections.unmodifiableCollection(generateSurroundingPointsCollection());
+	public static final Collection<Point> RECTANGLE_CROSS_POINTS_COLLECTION = Collections.unmodifiableCollection(generateCrossPointsCollection());
 	
 	private static Collection<Point> generateSurroundingPointsCollection()
 	{

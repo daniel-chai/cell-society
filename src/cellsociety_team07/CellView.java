@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class CellView implements Viewable
 {
-	private Circle view;
+	private Shape view;
 	private ColorMap colorMap;
 	private Cell cell;
 	private static final int DEFAULT_WIDTH = 10; 

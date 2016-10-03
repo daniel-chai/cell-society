@@ -58,11 +58,6 @@ public class FireSimulation extends Simulation {
 		Cell cell = new Cell(stateBurning);
 		grid.addCell(cell, startCell.x, startCell.y);		
 	}
-
-	public Collection<Point> getNeighborDisplacements()
-	{
-		return Neighborhood.CROSS_POINTS_COLLECTION;
-	}
 	
 	@Override
 	protected void updateGrid() {
@@ -131,6 +126,12 @@ public class FireSimulation extends Simulation {
 	@Override
 	protected Structure initStructure()
 	{
-		return new HexagonGrid(6);
+		return new Grid(rows, columns);
+	}
+	
+	@Override
+	public Collection<Point> getNeighborDisplacements()
+	{
+		return Neighborhood.RECTANGLE_CROSS_POINTS_COLLECTION;
 	}
 }
