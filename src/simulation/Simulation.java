@@ -112,7 +112,7 @@ public abstract class Simulation {
 	protected void initNeighbors() 
 	{
 		NeighborhoodDefiner neighborhoodDefiner = getNeighborhoodDefiner();
-		grid.calculateNeighborsForCells(new HexagonNeighborhoodDefiner());//neighborhoodDefiner);
+		grid.calculateNeighborsForCells(neighborhoodDefiner);
 	}
 	
 	protected StructureView initStructureView() 

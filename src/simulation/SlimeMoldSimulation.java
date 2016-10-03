@@ -31,6 +31,7 @@ public class SlimeMoldSimulation extends Simulation {
 	
 	public SlimeMoldSimulation(EventHandler<ActionEvent> goToMenu, int rows, int columns) {
 		super(goToMenu, rows, columns);
+		init();
 		cAMP = new double[grid.getHeight()][grid.getWidth()];
 	}
 
