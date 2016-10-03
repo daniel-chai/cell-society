@@ -4,9 +4,9 @@ import java.awt.Point;
 
 import structure.RectangleStructure;
 import structure.Structure;
-import structure_view.GridView;
-import structure_view.HexagonGridView;
-import structure_view.StructureView;
+import view.HexagonStructureView;
+import view.RectangleStructureView;
+import view.StructureView;
 
 import java.util.ArrayList;
 import java.util.HashMap;

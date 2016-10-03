@@ -2,7 +2,7 @@ package simulation;
 
 import structure.RectangleStructure;
 import structure.Structure;
-import structure_view.StructureView;
+import structure.TriangleStructure;
 
 import java.util.Map;
 
@@ -29,6 +29,8 @@ import java.util.Collection;
 import java.awt.Point;
 
 import ui_components.ButtonBuilder;
+import view.StructureView;
+import view.TriangleStructureView;
 
 /**
  * This class is the abstract superclass for all the different types of simulations. It is meant
@@ -98,7 +100,7 @@ public abstract class Simulation {
 	
 	protected Structure initStructure()
 	{
-		return new RectangleStructure(rows, columns);
+		return new TriangleStructure(rows);
 	}
 	
 	protected abstract void initStates();	
@@ -111,7 +113,7 @@ public abstract class Simulation {
 	
 	protected StructureView initStructureView() 
 	{
-		return new StructureView(grid,colorMap,300,300);
+		return new TriangleStructureView((TriangleStructure)grid,colorMap,500,500);
 	}
 	
 	protected void displayGrid() 

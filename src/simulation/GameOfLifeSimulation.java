@@ -19,9 +19,9 @@ import neighborhood_definer.NeighborhoodDefiner;
 import neighborhood_definer.RectangleNeighborhoodDefiner;
 import structure.RectangleStructure;
 import structure.Structure;
-import structure_view.GridView;
-import structure_view.HexagonGridView;
-import structure_view.StructureView;
+import view.HexagonStructureView;
+import view.RectangleStructureView;
+import view.StructureView;
 
 /**
  * This class implements the Game-of-Life simulation

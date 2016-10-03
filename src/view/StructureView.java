@@ -1,8 +1,6 @@
-package structure_view;
+package view;
 
 import cellsociety_team07.Cell;
-import cellsociety_team07.CellView;
-import cellsociety_team07.Viewable;
 import cellsociety_team07.ColorMap;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
@@ -18,7 +16,7 @@ import structure.Structure;;
  * to the Structure class because that way if a cell is added, it can be updated in the
  * View with out directly calling the View to update it.
  */
-public class StructureView implements Viewable
+public abstract class StructureView implements Viewable
 {
 	private GridPane grid;
 	private SoftReference<Structure> structure;
@@ -118,7 +116,7 @@ public class StructureView implements Viewable
 	 */
 	private void formatAndAddCellView(Cell cell, int row, int col)
 	{
-		CellView cellView = new CellView(cell,colorMap);
+		CellView cellView = getCellView(cell,row,col,colorMap);
 		cellViews.add(cellView);
 		cellView.setSize(cellWidth,cellHeight);
 		grid.add(cellView.getNode(), col, row);
@@ -141,5 +139,15 @@ public class StructureView implements Viewable
 		int maxCellHeight = gridWidth/structure.get().getHeight();
 		return maxCellHeight;
 	}
+	
+	/**
+	 * Defines the CellView for a given cell at location (row,col)
+	 * @param cell- cell the view is representing
+	 * @param row - the row location of that cell in the structure
+	 * @param col - the column location of that cell in the structure
+	 * @param cm - the ColorMap to define Color-State pairings
+	 * @return
+	 */
+	abstract protected CellView getCellView(Cell cell,int row, int col,ColorMap cm);
 
 }
