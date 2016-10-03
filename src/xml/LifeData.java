@@ -30,6 +30,7 @@ public class LifeData extends Data{
               .append("numRows='").append(myNumRows).append("', ")
               .append("numCols='").append(myNumCols).append("'")
               .append('}');
+        super.setDefaults(myNumRows, myNumCols);
        return result.toString();
     }
 

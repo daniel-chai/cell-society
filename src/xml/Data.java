@@ -41,6 +41,26 @@ public abstract class Data {
     public void setMyNumCols (String myNumCols) {
         this.myNumCols = myNumCols;
     }
+    
+    public void setDefaults(String numRows, String numCols){
+        if(numRows.equals("") && numCols.equals("")){
+            this.setMyNumRows("10");
+            this.setMyNumCols("10");
+        }
+        else if(!numRows.equals("") && numCols.equals(""))
+        {
+            this.setMyNumCols(numRows);
+        }
+        else if(numRows.equals("") && !numCols.equals(""))
+        {
+            this.setMyNumRows(numCols);
+        }
+        else
+        {
+            this.setMyNumRows(numRows);
+            this.setMyNumCols(numCols);
+        }
+    }
 
     public abstract String toString();
 }

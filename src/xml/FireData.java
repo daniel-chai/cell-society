@@ -63,6 +63,7 @@ public class FireData extends Data{
               .append("initialFire='").append(getMyInitialFire()).append("'")
               .append('}');
         checkValidity();
+        super.setDefaults(myNumRows, myNumCols);
        return result.toString();
     }
 }

@@ -64,6 +64,7 @@ public class PredData extends Data{
               .append("sharkBreed='").append((getMySharkBreed())).append("', ")
               .append("sharkStarve='").append((getMySharkStarve())).append("'")
               .append('}');
+        super.setDefaults(myNumRows, myNumCols);
        return result.toString();
     }
 }
