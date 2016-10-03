@@ -35,22 +35,24 @@ public class HexagonCellView extends UpDownPolygonCellView
 				  getWidth(),getHeight()/3.0,
 				  getWidth(),2*getHeight()/3.0,
 				  getWidth()/2.0,getHeight(),
+				  getWidth()/2.0,getHeight() + getHeight()/3.0,
+				  getWidth()/2.0,getHeight(),
 				  0.0,2*getHeight()/3.0,
 				  0.0,getHeight()/3.0);
-		hexagon.setLayoutY(-10);
 		return hexagon;
 	}
 
 	@Override
 	protected Polygon generateDownPolygon() 
 	{
-		Polygon hexagon = new Polygon(getWidth()/2.0,0,
+		Polygon hexagon = new Polygon(getWidth()/2.0,-getHeight()/3.0,
+									  getWidth()/2.0,0,
 									  getWidth(),getHeight()/3.0,
 									  getWidth(),2*getHeight()/3.0,
 									  getWidth()/2.0,getHeight(),
 									  0.0,2*getHeight()/3.0,
-									  0.0,getHeight()/3.0);
-		hexagon.setLayoutY(10);
+									  0.0,getHeight()/3.0,
+									  getWidth()/2.0,0);
 		return hexagon;
 	}
 	

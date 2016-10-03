@@ -78,16 +78,24 @@ public abstract class Simulation {
 		root = new Group();
 		simulationScene = new Scene(root, Main.SIZE, Main.SIZE, Color.WHITE);
 		
+		initButtonsAndGrid();
+		
+		return simulationScene;
+	}
+	
+	protected void initButtonsAndGrid() {
 		addMenuButton();
 		addStepButton();
 		addPlayButton();
 		addStopButton();
 		addParamChanger();
+		addRandomizeButton();
+		addSquareSelector();
+		addTriangleSelector();
+		addHexagonSelector();
 		
 		colorMap = initColors();
 		initGrid();
-		
-		return simulationScene;
 	}
 	
 	protected abstract ColorMap initColors();
@@ -123,7 +131,7 @@ public abstract class Simulation {
 	
 	protected StructureView initStructureView() 
 	{
-		return new HexagonStructureView((HexagonStructure)grid,colorMap,450,450);
+		return new HexagonStructureView((HexagonStructure)grid,colorMap,400,400);
 	}
 	
 	protected void displayGrid() 
@@ -260,11 +268,75 @@ public abstract class Simulation {
 	    }
 	    
 		root.getChildren().clear();
-		addMenuButton();
-		addStepButton();
-		addPlayButton();
-		addStopButton();
-		addParamChanger();
-		initGrid();
+		initButtonsAndGrid();
+	}
+	
+	protected void addRandomizeButton() {
+		Button randomButton = new ButtonBuilder().setText("Randomize States")
+				.setXLocation(500)
+				.setYLocation(625)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+
+		randomButton.setOnAction(e -> activateRandom());
+		root.getChildren().add(randomButton);
+	}
+	
+	protected void activateRandom() {
+		root.getChildren().clear();
+		initButtonsAndGrid();
+	}
+	
+	protected void addSquareSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Squares")
+				.setXLocation(20)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateSquares());
+		root.getChildren().add(b);
+	}
+	
+	protected void addTriangleSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Triangles")
+				.setXLocation(220)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateTriangles());
+		root.getChildren().add(b);
+	}
+	
+	protected void addHexagonSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Hexagons")
+				.setXLocation(420)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateHexagons());
+		root.getChildren().add(b);
+	}
+
+	protected void activateSquares() {
+		
+	}
+	
+	protected void activateTriangles() {
+		
+	}
+	
+	protected void activateHexagons() {
+		
 	}
 }

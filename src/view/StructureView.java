@@ -127,8 +127,8 @@ public abstract class StructureView implements Viewable
 	 */
 	private int determineCellWidth()
 	{
-		int maxCellWidth = gridHeight/structure.get().getWidth();
-		return maxCellWidth;
+		int maxCellHeight = gridHeight/structure.get().getHeight();
+		return maxCellHeight;
 	}
 	
 	/**
@@ -136,8 +136,8 @@ public abstract class StructureView implements Viewable
 	 */
 	private int determineCellHeight()
 	{
-		int maxCellHeight = gridWidth/structure.get().getHeight();
-		return maxCellHeight;
+		int maxCellWidth = gridWidth/structure.get().getWidth();
+		return maxCellWidth;
 	}
 	
 	/**
