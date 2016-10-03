@@ -114,7 +114,7 @@ public class DataXMLFactory extends XMLFactory {
     }
     
 private void checkForErrors (Element root){
-        
+ 
         try{
         Integer.parseInt(getTextValue(root, "numRows"));
         }catch (NumberFormatException e){

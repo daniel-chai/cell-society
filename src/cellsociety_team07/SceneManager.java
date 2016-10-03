@@ -15,6 +15,7 @@ import xml.FireData;
 import xml.LifeData;
 import xml.PredData;
 import xml.SegregationData;
+import xml.SlimeMoldData;
 /**
  * This class handles all the scene changes. In the whole application, there is only one Stage that is 
  * used. That is why this class takes in the primaryStage as a parameter in the constructor. All the 
@@ -27,6 +28,7 @@ public class SceneManager {
 	private static final String PREDATOR_PREY = "Predator-Prey";
 	private static final String FIRE = "Spreading Of Fire";
 	private static final String GAME_OF_LIFE = "Conway's Game of Life";
+	private static final String SLIME_MOLD = "Slime Mold";
 	
 	private Stage stage;
 	
@@ -150,7 +152,14 @@ public class SceneManager {
 	}
 	
 	private void goToSlimeMoldScene() {
-		SlimeMoldSimulation simulation = new SlimeMoldSimulation(goToMenu, 20, 20);
+		SlimeMoldData data = (SlimeMoldData) DataInput.getInputData(SLIME_MOLD);
+		
+		int rows = data.getMyNumRows();
+		int cols = data.getMyNumCols();
+		double depositRate = data.getMyDepositRate();
+		double evaporationRate = data.getMyEvaporationRate();
+		
+		SlimeMoldSimulation simulation = new SlimeMoldSimulation(goToMenu, rows, cols, depositRate, evaporationRate);
 		Scene simulationScene = simulation.init();
 		stage.setScene(simulationScene);
 	}

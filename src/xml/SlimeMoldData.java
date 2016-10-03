@@ -47,6 +47,8 @@ public class SlimeMoldData extends Data{
                   .append("depositRate='").append(getMyDepositRate()).append("', ")
                   .append("evaporationRate='").append(getMyEvaporationRate()).append("'")
                   .append('}');
+            
+            super.setDefaults(myNumRows, myNumCols);
            return result.toString();
         }
     }

@@ -39,6 +39,7 @@ public class SegregationData extends Data{
               .append("numCols='").append(myNumCols).append("', ")
               .append("threshold='").append(getMyThreshold()).append("'")
               .append('}');
+       super.setDefaults(myNumRows, myNumCols);
        return result.toString();
     }
 }

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><Data dataType="slime">
 	<title>Slime Mold</title>
 	<author>Thomas Schmickl</author>
+<<<<<<< HEAD
 	<numRows>10</numRows>
 	<numCols>10</numCols>
 	<depositRate>0.3</depositRate>
 	<evaporationRate>0.4</evaporationRate></Data>
+=======
+	<numRows>20</numRows>
+	<numCols>20</numCols>
+	<depositRate>1.0</depositRate>
+	<evaporationRate>0.5</evaporationRate></Data>
+>>>>>>> a4056b2cc0333d44240309f2212db09f3ca787f7

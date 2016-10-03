@@ -323,6 +323,7 @@ public abstract class Simulation {
 		root.getChildren().add(b);
 	}
 
+
 	protected void activateSquares() 
 	{
 		gridView.setCellView(CellView.RECTANGLE);
@@ -362,4 +363,5 @@ public abstract class Simulation {
 	
 	protected abstract void updateGrid();
 	protected abstract NeighborhoodDefiner getNeighborhoodDefiner();
+
 }
