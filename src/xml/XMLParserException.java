@@ -15,6 +15,10 @@ public class XMLParserException extends RuntimeException {
     public XMLParserException (String message, Object ... values) {
         super(String.format(message, values));
     }
+    
+    public XMLParserException(String message){
+        super(String.valueOf(message));
+    }
 
     /**
      * Create an exception based on a caught exception with a different message.

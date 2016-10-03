@@ -19,6 +19,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -245,8 +247,18 @@ public abstract class Simulation {
 	}
 	
 	protected void activateParams(TextField rowField, TextField colField) {
+	    try{
 		rows = Integer.parseInt(rowField.getText());
 		columns = Integer.parseInt(colField.getText());
+	    }
+	    catch(NumberFormatException e){
+	        Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Message");
+	        alert.setHeaderText("Error!");
+	        alert.setContentText("Please Enter Valid Values");
+	        alert.showAndWait();
+	    }
+	    
 		root.getChildren().clear();
 		addMenuButton();
 		addStepButton();

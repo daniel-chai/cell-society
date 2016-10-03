@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><Data dataType="slime">
+	<title>Slime Mold</title>
+	<author>Thomas Schmickl</author>
+	<numRows>10</numRows>
+	<numCols>10</numCols>
+	<depositRate>0.3</depositRate>
+	<evaporationRate>0.4</evaporationRate></Data>

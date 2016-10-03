@@ -33,11 +33,13 @@ public class DataXMLFactory extends XMLFactory {
         else if(dataType.equals("predatorprey")){
             return getPredData(root);
         }
+        else if(dataType.equals("slime")){
+            return getSlimeMoldData(root);
+        }
         else{
             checkDataType(root);
         }
         
-
         return null; 
     }
 
@@ -83,6 +85,17 @@ public class DataXMLFactory extends XMLFactory {
         checkForErrors(root);
         return new SegregationData(title, author, numRows, numCols, threshold);
     }
+    
+    private SlimeMoldData getSlimeMoldData (Element root) throws XMLFactoryException{
+        String title = getTextValue(root, "title");
+        String author = getTextValue(root, "author");
+        String numRows = getTextValue(root, "numRows");
+        String numCols = getTextValue(root, "numCols");
+        String depositRate = getTextValue(root, "depositRate");
+        String evaporationRate = getTextValue(root, "evaporationRate");
+        checkForErrors(root);
+        return new SlimeMoldData(title, author, numRows, numCols, depositRate, evaporationRate);
+    }
 
     @Override
     protected boolean isValidFile (Element root) {
@@ -100,28 +113,27 @@ public class DataXMLFactory extends XMLFactory {
         }
     }
     
-    private void checkForErrors (Element root){
+private void checkForErrors (Element root){
         
         try{
         Integer.parseInt(getTextValue(root, "numRows"));
         }catch (NumberFormatException e){
-            System.out.println(e.toString());
-            System.out.println("Invalid entry in numRows: " + getTextValue(root, "numRows"));
+            throw new XMLParserException("Invalid entry in numRows");
         }
         
         try{
             Integer.parseInt(getTextValue(root, "numCols"));
         }catch (NumberFormatException e){ 
-            System.out.println(e.toString());
-            System.out.println("Invalid entry in numCols: " + getTextValue(root, "numCols"));
+            throw new XMLParserException("Invalid entry in numCols");
         }
         
         if(root.getAttribute("dataType").equals("fire")){
             if(Double.parseDouble(getTextValue(root, "probCatch")) > 1 ||
                     Double.parseDouble(getTextValue(root, "probCatch")) < 0 ){
-                System.out.println("Invalid entry in probCatch: " + getTextValue(root, "probCatch"));
-                throw new XMLParserException(null);
+                throw new XMLParserException("Invalid entry in probCatch");
             }
+        
         }
     }
+
 }
