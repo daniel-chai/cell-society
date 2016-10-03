@@ -20,6 +20,9 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.Rectangle;
@@ -77,6 +80,7 @@ public abstract class Simulation {
 		addStepButton();
 		addPlayButton();
 		addStopButton();
+		addParamChanger();
 		
 		colorMap = initColors();
 		initGrid();
@@ -202,5 +206,47 @@ public abstract class Simulation {
 				Cell cell = grid.getCell(row, col);
 				cell.setState(nextState[row][col]);
 		}
+	}
+	
+	protected void addParamChanger() {
+		Label rowLabel = new Label("Rows:");
+		TextField rowField = new TextField();
+		rowField.setMaxWidth(50);
+		
+		HBox rowParam = new HBox();
+		rowParam.getChildren().addAll(rowLabel, rowField);
+		rowParam.setSpacing(10);
+		rowParam.setLayoutX(20);
+		rowParam.setLayoutY(625);
+		
+		Label colLabel = new Label("Columns:");
+		TextField colField = new TextField();
+		colField.setMaxWidth(50);
+		
+		HBox colParam = new HBox();
+		colParam.getChildren().addAll(colLabel, colField);
+		colParam.setSpacing(10);
+		colParam.setLayoutX(140);
+		colParam.setLayoutY(625);
+		
+		Button paramButton = new ButtonBuilder().setText("Update parameters")
+								.setXLocation(300)
+								.setYLocation(625)
+								.setWidth(150)
+								.setHeight(20)
+								.setFontSize(15)
+								.build();
+		
+		paramButton.setOnAction(e -> activateParams(rowField, colField));
+		
+		root.getChildren().add(rowParam);
+		root.getChildren().add(colParam);
+		root.getChildren().add(paramButton);
+	}
+	
+	protected void activateParams(TextField rowField, TextField colField) {
+		rows = Integer.parseInt(rowField.getText());
+		columns = Integer.parseInt(colField.getText());
+		initGrid();
 	}
 }
