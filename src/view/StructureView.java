@@ -22,6 +22,7 @@ public abstract class StructureView implements Viewable
 	private SoftReference<Structure> structure;
 	private ColorMap colorMap;
 	private Collection<CellView> cellViews;
+	private String cellViewClass;
 	
 	private int gridWidth;
 	private int gridHeight;
@@ -45,6 +46,7 @@ public abstract class StructureView implements Viewable
 		this.gridHeight = height;
 		this.cellWidth = determineCellWidth();
 		this.cellHeight = determineCellHeight();
+		this.cellViewClass = "";
 		
 		populateGridPane();
 	}
@@ -148,6 +150,37 @@ public abstract class StructureView implements Viewable
 	 * @param cm - the ColorMap to define Color-State pairings
 	 * @return
 	 */
-	abstract protected CellView getCellView(Cell cell,int row, int col,ColorMap cm);
+	protected CellView getCellView(Cell cell,int row, int col,ColorMap cm)
+	{
+		if(cellViewClass.equals(CellView.HEXAGON))
+		{
+			return new HexagonCellView(cell,cm,col);
+		}
+		else if(cellViewClass.equals(CellView.TRIANGLE))
+		{
+			return new TriangleCellView(cell,cm,row,col);
+		}
+		else
+		{
+			return new RectangleCellView(cell,cm);
+		}
+	}
+	
+	/**
+	 * Sets the CellView for the structure to the CellView Class corresponding
+	 * to the cellViewClassString
+	 * @param cellViewClassString- String that resembles a CellView class
+	 */
+	public void setCellView(String cellViewClassString)
+	{
+		this.cellViewClass = cellViewClassString;
+		resetGridPaneAndCellViews();
+		populateGridPane();
+	}
 
+	private void resetGridPaneAndCellViews()
+	{
+		this.grid = new GridPane();
+		this.cellViews = new ArrayList<CellView>();
+	}
 }

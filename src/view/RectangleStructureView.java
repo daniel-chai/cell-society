@@ -16,11 +16,4 @@ public class RectangleStructureView extends StructureView
 	{
 		super(grid,cm,width,height);
 	}
-
-	@Override
-	protected CellView getCellView(Cell cell, int row, int col, ColorMap cm) 
-	{
-		return new HexagonCellView(cell,cm,col);
-	}
-	
 }

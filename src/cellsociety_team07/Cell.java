@@ -51,6 +51,14 @@ public class Cell {
 	}
 	
 	/**
+	 * Resets neighborhood to a new Neighborhood
+	 */
+	public void resetNeighborhood()
+	{
+		neighborhood = new Neighborhood();
+	}
+	
+	/**
 	 * Sets the State of the cell, checks to make sure the Cell is
 	 * not an OUT_OF_BOUNDS cell by checking the State. The if statement
 	 * makes sure the Cell OUT_OF_BOUNDS constant is immutable

@@ -15,9 +15,9 @@ import javafx.scene.paint.Color;
 public class TriangleCellView extends UpDownPolygonCellView
 {
 	
-	public TriangleCellView(Cell cell, ColorMap map, boolean isPointingUpwards) 
+	public TriangleCellView(Cell cell, ColorMap map, int row, int col) 
 	{
-		super(cell, map, isPointingUpwards);
+		super(cell, map, isSumOfCoordinatesEven(row,col));
 	}
 
 	@Override
@@ -30,6 +30,12 @@ public class TriangleCellView extends UpDownPolygonCellView
 	protected Polygon generateDownPolygon() 
 	{
 		return new Polygon(0.0, 0.0,getWidth(), 0.0,getWidth()/2.0,getHeight());
+	}
+	
+	
+	private static boolean isSumOfCoordinatesEven(int row, int col)
+	{
+		return (row + col) % 2 == 0;
 	}
 	
 

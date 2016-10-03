@@ -43,6 +43,13 @@ public class FireData extends Data{
 		
         return startCell;
     }
+    
+    private void checkValidity() throws XMLParserException{
+        if(getMyInitialFire().getX() > getMyNumCols() || 
+                getMyInitialFire().getY() > getMyNumRows()){
+            throw new XMLParserException("initalFire location not in grid boundaries");
+        }
+    }
 
     @Override
     public String toString () {
@@ -55,6 +62,7 @@ public class FireData extends Data{
               .append("probCatch='").append(getMyProbCatch()).append("', ")
               .append("initialFire='").append(getMyInitialFire()).append("'")
               .append('}');
+        checkValidity();
        return result.toString();
     }
 }

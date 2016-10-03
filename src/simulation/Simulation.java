@@ -19,6 +19,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -30,11 +32,13 @@ import javafx.util.Duration;
 import neighborhood.Neighborhood;
 import neighborhood_definer.HexagonNeighborhoodDefiner;
 import neighborhood_definer.NeighborhoodDefiner;
+import neighborhood_definer.TriangleNeighborhoodDefiner;
 
 import java.util.Collection;
 import java.awt.Point;
 
 import ui_components.ButtonBuilder;
+import view.CellView;
 import view.HexagonStructureView;
 import view.RectangleStructureView;
 import view.StructureView;
@@ -89,6 +93,9 @@ public abstract class Simulation {
 		addStopButton();
 		addParamChanger();
 		addRandomizeButton();
+		addSquareSelector();
+		addTriangleSelector();
+		addHexagonSelector();
 		
 		colorMap = initColors();
 		initGrid();
@@ -103,11 +110,7 @@ public abstract class Simulation {
 		
 		gridView = initStructureView();
 
-		Node gridUI = gridView.getNode();
-		gridUI.setLayoutX(100);
-		gridUI.setLayoutY(100);
-		 
-		root.getChildren().add(gridUI);
+		configureGridUI();
 		
 		displayGrid();
 	}
@@ -121,24 +124,19 @@ public abstract class Simulation {
 	
 	protected void initNeighbors() 
 	{
-		NeighborhoodDefiner neighborhoodDefiner = getNeighborhoodDefiner();
+		grid.setNeighborhoods(getNeighborhoodDefiner());
 		
-		grid.calculateNeighborsForCells(neighborhoodDefiner);
 	}
 	
 	protected StructureView initStructureView() 
 	{
-		return new RectangleStructureView((RectangleStructure)grid,colorMap,400,400);
+		return new RectangleStructureView((RectangleStructure)grid,colorMap,300,300);
 	}
 	
 	protected void displayGrid() 
 	{		
 		gridView.updateView();
 	}
-	
-	protected abstract void updateGrid();
-	
-	protected abstract NeighborhoodDefiner getNeighborhoodDefiner();
 	
 	protected void addMenuButton() {
 		Button menuButton = new ButtonBuilder().setText("Back To Menu")
@@ -252,8 +250,18 @@ public abstract class Simulation {
 	}
 	
 	protected void activateParams(TextField rowField, TextField colField) {
+	    try{
 		rows = Integer.parseInt(rowField.getText());
 		columns = Integer.parseInt(colField.getText());
+	    }
+	    catch(NumberFormatException e){
+	        Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Message");
+	        alert.setHeaderText("Error!");
+	        alert.setContentText("Please Enter Valid Values");
+	        alert.showAndWait();
+	    }
+	    
 		root.getChildren().clear();
 		initButtonsAndGrid();
 	}
@@ -275,4 +283,83 @@ public abstract class Simulation {
 		root.getChildren().clear();
 		initButtonsAndGrid();
 	}
+	
+	protected void addSquareSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Squares")
+				.setXLocation(20)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateSquares());
+		root.getChildren().add(b);
+	}
+	
+	protected void addTriangleSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Triangles")
+				.setXLocation(220)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateTriangles());
+		root.getChildren().add(b);
+	}
+	
+	protected void addHexagonSelector() {
+		Button b = new ButtonBuilder().setText("Set Cells to Hexagons")
+				.setXLocation(420)
+				.setYLocation(560)
+				.setWidth(100)
+				.setHeight(20)
+				.setFontSize(15)
+				.build();
+		
+		b.setOnAction(e -> activateHexagons());
+		root.getChildren().add(b);
+	}
+
+	protected void activateSquares() 
+	{
+		gridView.setCellView(CellView.RECTANGLE);
+		grid.setNeighborhoods(getNeighborhoodDefiner());
+		resetGridUI();
+	}
+	
+	protected void activateTriangles() 
+	{
+		gridView.setCellView(CellView.TRIANGLE);
+		grid.setNeighborhoods(new TriangleNeighborhoodDefiner());
+		resetGridUI();
+	}
+	
+	protected void activateHexagons() 
+	{
+		gridView.setCellView(CellView.HEXAGON);
+		resetGridUI();
+		grid.setNeighborhoods(new HexagonNeighborhoodDefiner());
+		
+	}
+	
+	private void resetGridUI()
+	{
+		root.getChildren().remove(gridUI);
+		configureGridUI();
+	}
+	
+	private void configureGridUI()
+	{
+		gridUI = gridView.getNode();
+		gridUI.setLayoutX(50);
+		gridUI.setLayoutY(100);
+		 
+		root.getChildren().add(gridUI);
+	}
+	
+	protected abstract void updateGrid();
+	protected abstract NeighborhoodDefiner getNeighborhoodDefiner();
 }

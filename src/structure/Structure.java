@@ -23,6 +23,7 @@ public abstract class Structure implements Iterable<Cell>
 	private Map<Point,Cell> board;
 	private int numCols;
 	private int numRows;
+	private NeighborhoodDefiner neighborhoodDefiner;
 	private boolean isBounded;
 	
 	/**
@@ -163,7 +164,7 @@ public abstract class Structure implements Iterable<Cell>
 	 * next to the Cell, you would pass a Collection of Points containing:
 	 * (-1,0),(-1,1),(0,1),(1,1),(1,1),(1,-1),(0,-1),(-1,-1)
 	 */
-	public void calculateNeighborsForCells(NeighborhoodDefiner neighborDefiner)
+	public void calculateNeighborsForCells()
 	{
 		for(Point cellPoint : getPointsOnBoard())
 		{
@@ -171,7 +172,7 @@ public abstract class Structure implements Iterable<Cell>
 			
 			if(currentCell != null && currentCell.isValid())
 			{
-				Collection<Point> neighbors = neighborDefiner.getPotentialNeighbors(cellPoint);
+				Collection<Point> neighbors = neighborhoodDefiner.getPotentialNeighbors(cellPoint);
 				
 				for(Point possiblePoint : neighbors)
 				{
@@ -184,6 +185,27 @@ public abstract class Structure implements Iterable<Cell>
 		}
 	}
 	
+	/**
+	 * Sets the NeighborhoodDefiner to nd
+	 * @param nd- the NeighborhoodDefiner you want to set to
+	 */
+	public void setNeighborhoods(NeighborhoodDefiner nd)
+	{
+		neighborhoodDefiner = nd;
+		clearPreviousNeighborhoods();
+		calculateNeighborsForCells();
+	}
+	
+	private void clearPreviousNeighborhoods()
+	{
+		for(Cell cell : this)
+		{
+			if(cell != null && cell.isValid())
+			{
+				cell.resetNeighborhood();
+			}
+		}
+	}
 	/**
 	 * 
 	 * @param p

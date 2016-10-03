@@ -16,6 +16,10 @@ import cellsociety_team07.ColorMap;
  */
 public abstract class CellView implements Viewable
 {
+	public static final String HEXAGON = "Hexagon";
+	public static final String TRIANGLE = "Triangle";
+	public static final String RECTANGLE = "Rectangle";
+	
 	private Shape view;
 	private ColorMap colorMap;
 	private Cell cell;

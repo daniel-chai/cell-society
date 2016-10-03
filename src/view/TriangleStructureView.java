@@ -11,25 +11,5 @@ public class TriangleStructureView extends StructureView
 	{
 		super(triangle,cm,width,height);
 	}
-
-	@Override
-	protected CellView getCellView(Cell cell, int row, int col, ColorMap cm) 
-	{
-		if(isSumOfCoordinatesEven(row,col))
-		{
-			return new TriangleCellView(cell,cm,false);
-		}
-		else
-		{
-			return new TriangleCellView(cell,cm,true);
-		}
-	}
-	
-	private boolean isSumOfCoordinatesEven(int row, int col)
-	{
-		return (row + col) % 2 == 0;
-	}
-	
-	
 	
 }
