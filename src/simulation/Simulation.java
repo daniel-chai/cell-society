@@ -1,8 +1,14 @@
 package simulation;
 
+import structure.CircleStructure;
+import structure.HexagonStructure;
 import structure.RectangleStructure;
 import structure.Structure;
 import structure.TriangleStructure;
+<<<<<<< HEAD
+=======
+import structure_view.StructureView;
+>>>>>>> feef21d8e6c19cba7ff053eca1418e9f9a0778f4
 
 import java.util.Map;
 

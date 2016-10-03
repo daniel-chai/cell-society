@@ -42,6 +42,7 @@ public abstract class CellView implements Viewable
 		setColor(colorMap.getColor(cell.getState()));
 	}
 	
+	
 	/**
 	 * Returns the javafx Node of the view
 	 */

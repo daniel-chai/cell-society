@@ -22,16 +22,18 @@ public class Menu {
 	private EventHandler<ActionEvent> goToPredatorPrey;
 	private EventHandler<ActionEvent> goToFire;
 	private EventHandler<ActionEvent> goToGameOfLife;
+	private EventHandler<ActionEvent> goToSlimeMold;
 	
 	/**
 	 * Constructor for Menu class
 	 */
 	public Menu(EventHandler<ActionEvent> segregation, EventHandler<ActionEvent> predatorPrey,
-			EventHandler<ActionEvent> fire, EventHandler<ActionEvent> gameOfLife) {
+			EventHandler<ActionEvent> fire, EventHandler<ActionEvent> gameOfLife, EventHandler<ActionEvent> slimeMold) {
 		this.goToSegregation = segregation;
 		this.goToPredatorPrey = predatorPrey;
 		this.goToFire = fire;
 		this.goToGameOfLife = gameOfLife;
+		this.goToSlimeMold = slimeMold;
 	}
 	
 	/**
@@ -70,14 +72,21 @@ public class Menu {
 									.setYLocation(200)
 									.build();
 		
+		Button slimeMoldBtn = new ButtonBuilder().setText("Start Slime Mold Simulation")
+									.setXLocation(50)
+									.setYLocation(250)
+									.build();
+		
 		segregationBtn.setOnAction(goToSegregation);
 		predatorPreyBtn.setOnAction(goToPredatorPrey);
 		fireBtn.setOnAction(goToFire);
 		gameOfLifeBtn.setOnAction(goToGameOfLife);
+		slimeMoldBtn.setOnAction(goToSlimeMold);
 		
 		root.getChildren().add(segregationBtn);
 		root.getChildren().add(predatorPreyBtn);
 		root.getChildren().add(fireBtn);
 		root.getChildren().add(gameOfLifeBtn);
+		root.getChildren().add(slimeMoldBtn);
 	}
 }
