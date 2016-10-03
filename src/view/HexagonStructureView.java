@@ -6,8 +6,13 @@ import structure.HexagonStructure;
 
 public class HexagonStructureView extends StructureView
 {
+	public HexagonStructureView(HexagonStructure hexagon, ColorMap cm, int width, int height, String cellViewType)
+	{
+		super(hexagon,cm,width,height,cellViewType);
+	}
+	
 	public HexagonStructureView(HexagonStructure hexagon, ColorMap cm, int width, int height)
 	{
-		super(hexagon,cm,width,height);
+		super(hexagon,cm,width,height,CellView.HEXAGON);
 	}
 }

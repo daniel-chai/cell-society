@@ -12,8 +12,13 @@ import structure.RectangleStructure;
  */
 public class RectangleStructureView extends StructureView
 {
+	public RectangleStructureView(RectangleStructure grid, ColorMap cm, int width, int height,String cellViewType)
+	{
+		super(grid,cm,width,height,cellViewType);
+	}
+	
 	public RectangleStructureView(RectangleStructure grid, ColorMap cm, int width, int height)
 	{
-		super(grid,cm,width,height);
+		super(grid,cm,width,height,CellView.RECTANGLE);
 	}
 }

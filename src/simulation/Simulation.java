@@ -65,6 +65,7 @@ public abstract class Simulation {
 	protected int columns;
 	
 	protected Node gridUI;
+	protected String cellViewType;
 	protected ColorMap colorMap;
 	protected State[][] nextState;
 	
@@ -74,6 +75,7 @@ public abstract class Simulation {
 		this.goToMenu = goToMenu;
 		this.rows = rows;
 		this.columns = columns;
+		this.cellViewType = CellView.RECTANGLE;
 	}
 	
 	public Scene init() 
@@ -130,7 +132,7 @@ public abstract class Simulation {
 	
 	protected StructureView initStructureView() 
 	{
-		return new RectangleStructureView((RectangleStructure)grid,colorMap,300,300);
+		return new RectangleStructureView((RectangleStructure)grid,colorMap,300,300,cellViewType);
 	}
 	
 	protected void displayGrid() 
@@ -263,6 +265,7 @@ public abstract class Simulation {
 	    }
 	    
 		root.getChildren().clear();
+		cellViewType = gridView.getCellViewType();
 		initButtonsAndGrid();
 	}
 	
@@ -355,8 +358,8 @@ public abstract class Simulation {
 	private void configureGridUI()
 	{
 		gridUI = gridView.getNode();
-		gridUI.setLayoutX(50);
-		gridUI.setLayoutY(100);
+		gridUI.setLayoutX(Main.SIZE/2 - gridView.getGridWidth()/2); // MAGIC NUMBERS
+		gridUI.setLayoutY(100); // MAGIC NUMBERS
 		 
 		root.getChildren().add(gridUI);
 	}

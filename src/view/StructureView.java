@@ -35,7 +35,7 @@ public abstract class StructureView implements Viewable
 	 * @param width
 	 * @param height
 	 */
-	public StructureView(Structure structure, ColorMap cm, int width, int height)
+	public StructureView(Structure structure, ColorMap cm, int width, int height, String cellViewType)
 	{
 		this.structure = new SoftReference<Structure>(structure);
 		this.grid = new GridPane();
@@ -46,7 +46,7 @@ public abstract class StructureView implements Viewable
 		this.gridHeight = height;
 		this.cellWidth = determineCellWidth();
 		this.cellHeight = determineCellHeight();
-		this.cellViewClass = "";
+		this.cellViewClass = cellViewType;
 		
 		populateGridPane();
 	}
@@ -57,7 +57,7 @@ public abstract class StructureView implements Viewable
 	 */
 	public StructureView(Structure structure, ColorMap cm)
 	{
-		this(structure,cm,200,200);
+		this(structure,cm,200,200,CellView.RECTANGLE);
 	}
 	/**
 	 * Returns the GridPane that contains the GUI of the board
@@ -81,6 +81,21 @@ public abstract class StructureView implements Viewable
 		cellHeight = determineCellHeight();
 	}
 	
+	/**
+	 * @return the width of the StructureView
+	 */
+	public int getGridWidth()
+	{
+		return gridWidth;
+	}
+	
+	/**
+	 * @return the height of the StructureView
+	 */
+	public int getGridHeight()
+	{
+		return gridHeight;
+	}
 	/**
 	 * Updates the Cell values in the GridPane
 	 */
@@ -129,8 +144,8 @@ public abstract class StructureView implements Viewable
 	 */
 	private int determineCellWidth()
 	{
-		int maxCellHeight = gridHeight/structure.get().getHeight();
-		return maxCellHeight;
+		int maxCellWidth = gridWidth/structure.get().getWidth();
+		return maxCellWidth;
 	}
 	
 	/**
@@ -138,8 +153,8 @@ public abstract class StructureView implements Viewable
 	 */
 	private int determineCellHeight()
 	{
-		int maxCellWidth = gridWidth/structure.get().getWidth();
-		return maxCellWidth;
+		int maxCellHeight = gridHeight/structure.get().getHeight();
+		return maxCellHeight;
 	}
 	
 	/**
@@ -176,6 +191,14 @@ public abstract class StructureView implements Viewable
 		this.cellViewClass = cellViewClassString;
 		resetGridPaneAndCellViews();
 		populateGridPane();
+	}
+	
+	/**
+	 * Returns the type of CellView for the current structure
+	 */
+	public String getCellViewType()
+	{
+		return cellViewClass;
 	}
 
 	private void resetGridPaneAndCellViews()
