@@ -247,6 +247,12 @@ public abstract class Simulation {
 	protected void activateParams(TextField rowField, TextField colField) {
 		rows = Integer.parseInt(rowField.getText());
 		columns = Integer.parseInt(colField.getText());
+		root.getChildren().clear();
+		addMenuButton();
+		addStepButton();
+		addPlayButton();
+		addStopButton();
+		addParamChanger();
 		initGrid();
 	}
 }
