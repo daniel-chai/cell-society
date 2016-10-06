@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Daniel Chai
+
 package cellsociety_team07;
 
 import java.awt.Point;

@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Daniel Chai
+
 package ui_components;
 
 import javafx.scene.control.Button;
