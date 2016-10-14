@@ -119,7 +119,7 @@ public abstract class Simulation {
 	
 	protected Structure initStructure()
 	{
-		return new RectangleStructure(rows,columns);
+		return new HexagonStructure(rows);
 	}
 	
 	protected abstract void initStates();	
@@ -132,7 +132,7 @@ public abstract class Simulation {
 	
 	protected StructureView initStructureView() 
 	{
-		return new RectangleStructureView((RectangleStructure)grid,colorMap,300,300,cellViewType);
+		return new HexagonStructureView((HexagonStructure)grid,colorMap,300,300,cellViewType);
 	}
 	
 	protected void displayGrid() 
